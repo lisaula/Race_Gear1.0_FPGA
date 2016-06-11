@@ -1,0 +1,29 @@
+//Clock
+NET "clk50mhz" LOC="B8"; 
+
+//reset
+Net "reset" LOC="C13" | IOSTANDARD = LVCMOS33;
+
+//switches
+Net "right" LOC="C12" | IOSTANDARD = LVCMOS33;
+Net "left" LOC="C10" | IOSTANDARD = LVCMOS33;
+
+# Rojo (GPIO0)
+
+Net "red_out" LOC="A10" | IOSTANDARD = LVCMOS33;
+
+# Verde (GPIO1)
+
+Net "green_out" LOC="E11" | IOSTANDARD = LVCMOS33;
+
+# Azul (GPIO2)
+
+Net "blue_out" LOC="E10" | IOSTANDARD = LVCMOS33;
+
+# hsync (GPIO3)
+
+Net "hsync" LOC="D10" | IOSTANDARD = LVCMOS33;
+
+# vsync (GPIO4)
+
+Net "vsync" LOC="E9" | IOSTANDARD = LVCMOS33;

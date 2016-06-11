@@ -1,0 +1,10 @@
+#-----------------------------------------------------------
+# PlanAhead v14.7
+# Build 321239 by xbuild on Fri Sep 27 19:31:35 MDT 2013
+# Start of session at: Sat Jun 11 11:15:24 2016
+# Process ID: 3324
+# Log file: C:/Users/Raim/Documents/Laboratorio/RaceGear/planAhead_run_1/planAhead.log
+# Journal file: C:/Users/Raim/Documents/Laboratorio/RaceGear/planAhead_run_1/planAhead.jou
+#-----------------------------------------------------------
+start_gui
+source C:/Users/Raim/Documents/Laboratorio/RaceGear/pa.fromNetlist.tcl
