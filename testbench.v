@@ -6,6 +6,7 @@ module testbench(
 	reg reset;
 	reg left;
 	reg right;
+	//reg [2:0]rgb_in;
    //input green_in,
    //input blue_in,
 	//input reset,
@@ -15,14 +16,21 @@ module testbench(
 	wire hsync;
 	wire vsync;
 	Main m(clk50mhz,reset,left,right,red_out,green_out,blue_out,hsync,vsync);
+	//VGA_LOGIC vga(clk50mhz,rgb_in, red_out,green_out,blue_out,hsync,vsync,hcount,vcount);
+	//reg [13:0] address;
+	//wire [2:0]data;
+	//rom_Bars rom (address, data);
 	initial 
 	begin
 		clk50mhz=0;
+		//address =0;
 		reset =0;
-		left = 0;
+		left =0;
 		right =0;
-	end
-	
+		//rgb_in[0]=1;
+		//rgb_in[1]=1;
+		//rgb_in[2]=1;
+	end	
 	always 
 	begin
 		#10

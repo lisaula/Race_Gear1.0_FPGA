@@ -13,7 +13,6 @@
  reg [9:0]hcount;
  reg [9:0]vcount;
  reg [2:0]color;
- reg [6:0]contColumn;
  assign hor_count = hcount;
  assign ver_count = vcount;
  always @(posedge clk)
@@ -83,6 +82,5 @@
 	hcount = 0;
 	vcount=0;
 	color = 3'b0;
-	contColumn = 7'b0;
 	end
 endmodule

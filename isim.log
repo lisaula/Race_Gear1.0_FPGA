@@ -7,9 +7,11 @@ Time resolution is 1 ps
 # wave add /
 # run 8400 us
 Simulator is doing circuit initialization process.
+address :     x
 Finished circuit initialization process.
 ISim P.20131013 (signature 0x8ef4fb42)
 This is a Full version of ISim.
 # run 8400 us
 Simulator is doing circuit initialization process.
+address :     x
 Finished circuit initialization process.
