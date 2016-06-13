@@ -12,7 +12,7 @@ module Main(
 	 );
 	wire vga_clk;
 	//assign vga_clk = clk50mhz;
-	//wire logic_clk;
+	wire logic_clk;
 	
 	//VGA counters
 	wire [9:0]hcount;
@@ -39,7 +39,7 @@ module Main(
 	DCM vga_clock_dcm (.CLKIN(clk50mhz),.CLKFX(vga_clk));
 	
 	
-	//CLK_Divider #(.counter_limit(31'h77359400))clk(.clk(clk50mhz),.clk1hz(vga_clk));
+	CLK_Divider #(.counter_limit(31'h2625a0))clk(.clk(clk50mhz),.clk1hz(logic_clk));
 	//CLK_Divider #(.counter_limit(31'h2faf080))clk2(.clk(clk50mhz),.clk1hz(logic_clk));
 	//setting image CarBlue
 	rom_Car rom(address,data_pix);
@@ -48,7 +48,7 @@ module Main(
 	rom_Bars rom3(address_bars_right,data_Bars_r);
 	VGA_LOGIC vga(vga_clk,data,red_out,green_out,blue_out,hsync,vsync,hcount, vcount);
 
-	always @(posedge vga_clk)
+	always @(posedge logic_clk)
 	begin
 		offset_car_y = 357;
 		if(left) begin

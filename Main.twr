@@ -39,26 +39,16 @@ Data Sheet report:
 -----------------
 All values displayed in nanoseconds (ns)
 
-Setup/Hold to clock clk50mhz
-------------+------------+------------+------------------+--------+
-            |Max Setup to|Max Hold to |                  | Clock  |
-Source      | clk (edge) | clk (edge) |Internal Clock(s) | Phase  |
-------------+------------+------------+------------------+--------+
-left        |    3.220(R)|    0.570(R)|vga_clk           |   0.000|
-reset       |    2.427(R)|    0.198(R)|vga_clk           |   0.000|
-right       |    3.546(R)|    0.250(R)|vga_clk           |   0.000|
-------------+------------+------------+------------------+--------+
-
 Clock clk50mhz to Pad
 ------------+------------+------------------+--------+
             | clk (edge) |                  | Clock  |
 Destination |   to PAD   |Internal Clock(s) | Phase  |
 ------------+------------+------------------+--------+
-blue_out    |    8.233(R)|vga_clk           |   0.000|
-green_out   |    8.281(R)|vga_clk           |   0.000|
-hsync       |    7.933(R)|vga_clk           |   0.000|
-red_out     |    8.247(R)|vga_clk           |   0.000|
-vsync       |    7.735(R)|vga_clk           |   0.000|
+blue_out    |    7.792(R)|vga_clk           |   0.000|
+green_out   |    8.285(R)|vga_clk           |   0.000|
+hsync       |    7.739(R)|vga_clk           |   0.000|
+red_out     |    8.418(R)|vga_clk           |   0.000|
+vsync       |    7.717(R)|vga_clk           |   0.000|
 ------------+------------+------------------+--------+
 
 Clock to Setup on destination clock clk50mhz
@@ -66,11 +56,11 @@ Clock to Setup on destination clock clk50mhz
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-clk50mhz       |   10.329|         |         |         |
+clk50mhz       |   10.861|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 
-Analysis completed Mon Jun 13 12:50:16 2016 
+Analysis completed Mon Jun 13 15:46:16 2016 
 --------------------------------------------------------------------------------
 
 Trace Settings:

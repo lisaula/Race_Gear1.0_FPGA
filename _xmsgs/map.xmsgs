@@ -11,6 +11,12 @@
 <msg type="info" file="LIT" num="244" delta="old" >All of the single ended outputs in this design are using slew rate limited output drivers. The delay on speed critical single ended outputs can be dramatically reduced by designating them as fast outputs.
 </msg>
 
+<msg type="warning" file="Pack" num="266" delta="new" >The function generator <arg fmt="%s" index="1">address_bars_left_not000373</arg> failed to merge with F5 multiplexer <arg fmt="%s" index="2">data_0_mux000042_f5</arg>.  <arg fmt="%z" index="3">There is a conflict for the FXMUX.</arg>  The design will exhibit suboptimal timing.
+</msg>
+
+<msg type="warning" file="Pack" num="266" delta="old" >The function generator <arg fmt="%s" index="1">rom/Mrom_data991_121</arg> failed to merge with F5 multiplexer <arg fmt="%s" index="2">rom/Mrom_data1231_11_f5_0</arg>.  <arg fmt="%z" index="3">There is a conflict for the FXMUX.</arg>  The design will exhibit suboptimal timing.
+</msg>
+
 <msg type="warning" file="Pack" num="266" delta="old" >The function generator <arg fmt="%s" index="1">rom/Mrom_data991_122</arg> failed to merge with F5 multiplexer <arg fmt="%s" index="2">rom/Mrom_data1231_11_f5_1</arg>.  <arg fmt="%z" index="3">There is a conflict for the FXMUX.</arg>  The design will exhibit suboptimal timing.
 </msg>
 
@@ -24,6 +30,9 @@
 </msg>
 
 <msg type="warning" file="Pack" num="266" delta="old" >The function generator <arg fmt="%s" index="1">rom/Mrom_data991_12</arg> failed to merge with F5 multiplexer <arg fmt="%s" index="2">rom/Mrom_data1231_11_f5</arg>.  <arg fmt="%z" index="3">There is a conflict for the FXMUX.</arg>  The design will exhibit suboptimal timing.
+</msg>
+
+<msg type="warning" file="Pack" num="266" delta="old" >The function generator <arg fmt="%s" index="1">rom/Mrom_data991_21</arg> failed to merge with F5 multiplexer <arg fmt="%s" index="2">rom/Mrom_data1231_20_f5</arg>.  <arg fmt="%z" index="3">There is a conflict for the FXMUX.</arg>  The design will exhibit suboptimal timing.
 </msg>
 
 <msg type="warning" file="Pack" num="266" delta="old" >The function generator <arg fmt="%s" index="1">rom/Mrom_data991_23</arg> failed to merge with F5 multiplexer <arg fmt="%s" index="2">rom/Mrom_data1231_22_f5</arg>.  <arg fmt="%z" index="3">There is a conflict for the FXMUX.</arg>  The design will exhibit suboptimal timing.

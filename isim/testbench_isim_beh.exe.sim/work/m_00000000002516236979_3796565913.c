@@ -22,10 +22,9 @@
 #define alloca _alloca
 #endif
 static const char *ng0 = "C:/Users/Raim/Documents/Laboratorio/RaceGear/rom_Bars.v";
-static const char *ng1 = "address : %d";
-static const char *ng2 = "lineas.mif";
-static int ng3[] = {0, 0};
-static int ng4[] = {16383, 0};
+static const char *ng1 = "lineas.mif";
+static int ng2[] = {0, 0};
+static int ng3[] = {16383, 0};
 
 
 
@@ -90,14 +89,10 @@ static void Initial_11_1(char *t0)
 LAB0:    xsi_set_current_line(11, ng0);
 
 LAB2:    xsi_set_current_line(12, ng0);
-    t1 = (t0 + 600U);
-    t2 = *((char **)t1);
-    xsi_vlogfile_write(1, 0, 0, ng1, 2, t0, (char)118, t2, 14);
-    xsi_set_current_line(13, ng0);
     t1 = (t0 + 920);
-    t2 = ((char*)((ng3)));
-    t3 = ((char*)((ng4)));
-    xsi_vlogfile_readmemh(ng2, 0, t1, 1, *((unsigned int *)t2), 1, *((unsigned int *)t3));
+    t2 = ((char*)((ng2)));
+    t3 = ((char*)((ng3)));
+    xsi_vlogfile_readmemh(ng1, 0, t1, 1, *((unsigned int *)t2), 1, *((unsigned int *)t3));
 
 LAB1:    return;
 }

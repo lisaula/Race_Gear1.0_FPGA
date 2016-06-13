@@ -27,6 +27,31 @@ module testbench(
 		reset =0;
 		left =0;
 		right =0;
+		#50
+		reset =1;
+		left =0;
+		right =0;
+		#50
+		reset =0;
+		left =1;
+		right =0;
+		#50
+		reset =0;
+		left =0;
+		right =1;
+		#50
+		reset =0;
+		left =0;
+		right =1;
+		#50
+		reset =0;
+		left =0;
+		right =1;
+		#50
+		reset =0;
+		left =1;
+		right =0;
+		
 		//rgb_in[0]=1;
 		//rgb_in[1]=1;
 		//rgb_in[2]=1;

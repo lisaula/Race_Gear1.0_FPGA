@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="C:/Users/Raim/Documents/Laboratorio/RaceGear/testbench_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="testbench" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="14" />
+   <wvobject fp_name="/testbench/red_out" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">red_out</obj_property>
+      <obj_property name="ObjectShortName">red_out</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/green_out" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">green_out</obj_property>
+      <obj_property name="ObjectShortName">green_out</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/blue_out" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">blue_out</obj_property>
+      <obj_property name="ObjectShortName">blue_out</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/hsync" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">hsync</obj_property>
+      <obj_property name="ObjectShortName">hsync</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/vsync" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">vsync</obj_property>
+      <obj_property name="ObjectShortName">vsync</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/clk50mhz" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">clk50mhz</obj_property>
+      <obj_property name="ObjectShortName">clk50mhz</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/reset" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/left" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">left</obj_property>
+      <obj_property name="ObjectShortName">left</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/right" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">right</obj_property>
+      <obj_property name="ObjectShortName">right</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/m/logic_clk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">logic_clk</obj_property>
+      <obj_property name="ObjectShortName">logic_clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/m/hcount" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">hcount[9:0]</obj_property>
+      <obj_property name="ObjectShortName">hcount[9:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/m/vcount" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">vcount[9:0]</obj_property>
+      <obj_property name="ObjectShortName">vcount[9:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/m/offset_car_x" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">offset_car_x[9:0]</obj_property>
+      <obj_property name="ObjectShortName">offset_car_x[9:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/m/offset_car_y" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">offset_car_y[9:0]</obj_property>
+      <obj_property name="ObjectShortName">offset_car_y[9:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+</wave_config>

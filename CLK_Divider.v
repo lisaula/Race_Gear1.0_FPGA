@@ -23,4 +23,10 @@ module CLK_Divider(
 			counter = 31'h0;
 		end
 	end
+	
+	initial
+	begin
+		counter =0;
+		clk1hz_buff=0;
+	end
 endmodule
