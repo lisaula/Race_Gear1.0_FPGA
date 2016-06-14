@@ -5,10 +5,10 @@
      behavior or data corruption.  It is strongly advised that
      users do not edit the contents of this file. -->
 <messages>
-<msg type="warning" file="HDLCompilers" num="259" delta="old" ><arg fmt="%s" index="1">&quot;Main.v&quot; line 57 </arg>Connection to input port &apos;<arg fmt="%s" index="2">offset_x</arg>&apos; does not match port size
+<msg type="warning" file="HDLCompilers" num="259" delta="old" ><arg fmt="%s" index="1">&quot;Main.v&quot; line 59 </arg>Connection to input port &apos;<arg fmt="%s" index="2">offset_x</arg>&apos; does not match port size
 </msg>
 
-<msg type="warning" file="HDLCompilers" num="259" delta="old" ><arg fmt="%s" index="1">&quot;Main.v&quot; line 57 </arg>Connection to input port &apos;<arg fmt="%s" index="2">offset_y</arg>&apos; does not match port size
+<msg type="warning" file="HDLCompilers" num="259" delta="old" ><arg fmt="%s" index="1">&quot;Main.v&quot; line 59 </arg>Connection to input port &apos;<arg fmt="%s" index="2">offset_y</arg>&apos; does not match port size
 </msg>
 
 <msg type="warning" file="Xst" num="2591" delta="old" ><arg fmt="%s" index="1">&quot;Main.v&quot; line 39:</arg> <arg fmt="%s" index="2">attribute on instance</arg> &lt;<arg fmt="%s" index="3">CLKFX_DIVIDE</arg>&gt; overrides <arg fmt="%s" index="4">generic/parameter on entity</arg>. It is possible that simulator will not take this attribute into account.

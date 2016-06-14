@@ -40,7 +40,6 @@ module Main(
 	
 	
 	CLK_Divider #(.counter_limit(31'h2625a0))clk(.clk(clk50mhz),.clk1hz(logic_clk));
-	
 	//setting image CarBlue
 	rom_Car rom(address,data_pix);
 	
@@ -54,8 +53,22 @@ module Main(
 	wire [9:0]enemy_pos_x;
 	wire [9:0]enemy_pos_y;
 	wire [2:0]enemy_data;
-	Enemy enemy(vga_clk,reset, left_pos,0,hcount, vcount,enemy_pos_x,enemy_pos_y,enemy_data);
+	wire collision;
+	wire enemy_clk;
+	CLK_Divider #(.counter_limit(31'h186a0))clk_enemy(.clk(clk50mhz),.clk1hz(enemy_clk));
+	Enemy enemy(vga_clk,enemy_clk,reset, left_pos,0,hcount, vcount,collision,enemy_pos_x,enemy_pos_y,enemy_data);
+	//Enemy enemy2(vga_clk,enemy_clk,reset, right_pos,0,hcount, vcount,enemy_pos_x,enemy_pos_y,enemy_data);
 	
+	//Collision validation
+	wire [9:0]e_pos_x;
+	wire[9:0]e_pos_y;
+	wire[9:0]car_pos_x;
+	wire[9:0]car_pos_y;
+	assign e_pos_x = enemy_pos_x;
+	assign e_pos_y = enemy_pos_y;
+	assign car_pos_x = offset_car_x;
+	assign car_pos_y = offset_car_y;
+	ALU alu(enemy_clk,e_pos_x, e_pos_y, car_pos_x, car_pos_y,collision);
 	
 	//setting image Bars
 	rom_Bars rom2(address_bars_left,data_Bars_l);
