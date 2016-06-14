@@ -1,6 +1,3 @@
 verilog work "rom_Car.v"
 verilog work "CLK_Divider.v"
-verilog work "VGA_LOGIC.v"
-verilog work "rom_Bars.v"
 verilog work "Enemy.v"
-verilog work "Main.v"

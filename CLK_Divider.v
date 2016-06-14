@@ -5,10 +5,10 @@ module CLK_Divider(
 	 output clk1hz
 	 );
 	 
-	 reg [30:0] counter;
+	 reg [24:0] counter;
 	 reg clk1hz_buff;
 	 parameter 
-		counter_limit = 31'h17d7840;
+		counter_limit = 25'h17d7840;
 	 
 	 assign clk1hz = clk1hz_buff;
 	 
@@ -20,7 +20,7 @@ module CLK_Divider(
 		if(counter == (counter_limit))
 		begin
 			clk1hz_buff = !clk1hz_buff;
-			counter = 31'h0;
+			counter = 25'h0;
 		end
 	end
 	

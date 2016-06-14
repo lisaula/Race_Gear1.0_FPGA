@@ -44,11 +44,11 @@ Clock clk50mhz to Pad
             | clk (edge) |                  | Clock  |
 Destination |   to PAD   |Internal Clock(s) | Phase  |
 ------------+------------+------------------+--------+
-blue_out    |    7.792(R)|vga_clk           |   0.000|
-green_out   |    8.285(R)|vga_clk           |   0.000|
-hsync       |    7.739(R)|vga_clk           |   0.000|
-red_out     |    8.418(R)|vga_clk           |   0.000|
-vsync       |    7.717(R)|vga_clk           |   0.000|
+blue_out    |    8.007(R)|vga_clk           |   0.000|
+green_out   |    8.070(R)|vga_clk           |   0.000|
+hsync       |    7.946(R)|vga_clk           |   0.000|
+red_out     |    7.708(R)|vga_clk           |   0.000|
+vsync       |    8.724(R)|vga_clk           |   0.000|
 ------------+------------+------------------+--------+
 
 Clock to Setup on destination clock clk50mhz
@@ -56,18 +56,18 @@ Clock to Setup on destination clock clk50mhz
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-clk50mhz       |   10.861|         |         |         |
+clk50mhz       |   10.739|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 
-Analysis completed Mon Jun 13 15:46:16 2016 
+Analysis completed Mon Jun 13 20:03:51 2016 
 --------------------------------------------------------------------------------
 
 Trace Settings:
 -------------------------
 Trace Settings 
 
-Peak Memory Usage: 122 MB
+Peak Memory Usage: 125 MB
 
 
 

@@ -40,14 +40,30 @@ module Main(
 	
 	
 	CLK_Divider #(.counter_limit(31'h2625a0))clk(.clk(clk50mhz),.clk1hz(logic_clk));
-	//CLK_Divider #(.counter_limit(31'h2faf080))clk2(.clk(clk50mhz),.clk1hz(logic_clk));
+	
 	//setting image CarBlue
 	rom_Car rom(address,data_pix);
+	
+	//position values
+	parameter 
+		left_pos = 9'hc5,
+		center_pos = 9'h117,
+		right_pos =9'h169;
+	
+	//setting enemy
+	wire [9:0]enemy_pos_x;
+	wire [9:0]enemy_pos_y;
+	wire [2:0]enemy_data;
+	Enemy enemy(vga_clk,reset, left_pos,0,hcount, vcount,enemy_pos_x,enemy_pos_y,enemy_data);
+	
+	
 	//setting image Bars
 	rom_Bars rom2(address_bars_left,data_Bars_l);
 	rom_Bars rom3(address_bars_right,data_Bars_r);
+	
+	//VGA instantiate
 	VGA_LOGIC vga(vga_clk,data,red_out,green_out,blue_out,hsync,vsync,hcount, vcount);
-
+	
 	always @(posedge logic_clk)
 	begin
 		offset_car_y = 357;
@@ -112,9 +128,17 @@ module Main(
 				else begin
 					address=0;
 				end
-			end
-		end
-		else 
+				//setting car enemy bounderies
+				if(vcount >= enemy_pos_y && vcount < enemy_pos_y+121)
+				begin
+					if(hcount >= enemy_pos_x && hcount < enemy_pos_x+80)
+					begin
+						data =enemy_data;
+					end
+				end
+			end //if hcount < 640
+		end //if vcount <480
+		else
 		begin 
 			address_bars_left=0;
 			address_bars_right=0;
