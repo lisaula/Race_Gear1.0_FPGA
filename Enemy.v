@@ -3,6 +3,7 @@ module Enemy(
 	input clk,
 	input logic_clk,
 	input reset,
+	input enable,
 	input [9:0] offset_x,
 	input [9:0] offset_y,
 	input [9:0] hcount,
@@ -30,6 +31,12 @@ module Enemy(
 			end
 		end
 		if(reset)
+		begin
+			counter=0;
+			pos_y=0;
+		end
+		
+		if(enable)
 		begin
 			counter=0;
 			pos_y=0;

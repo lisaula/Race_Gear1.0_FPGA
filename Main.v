@@ -49,14 +49,23 @@ module Main(
 		center_pos = 9'h117,
 		right_pos =9'h169;
 	
-	//setting enemy
+	//setting enemies
+	wire enemy_clk;
+	CLK_Divider #(.counter_limit(31'h186a0))clk_enemy(.clk(clk50mhz),.clk1hz(enemy_clk));
 	wire [9:0]enemy_pos_x;
 	wire [9:0]enemy_pos_y;
 	wire [2:0]enemy_data;
 	wire collision;
-	wire enemy_clk;
-	CLK_Divider #(.counter_limit(31'h186a0))clk_enemy(.clk(clk50mhz),.clk1hz(enemy_clk));
-	Enemy enemy(vga_clk,enemy_clk,reset, left_pos,0,hcount, vcount,collision,enemy_pos_x,enemy_pos_y,enemy_data);
+	reg enable;
+	Enemy enemy(vga_clk,enemy_clk,reset,enable, left_pos,0,hcount, vcount,collision,enemy_pos_x,enemy_pos_y,enemy_data);
+	
+	//2
+	wire [9:0]enemy_pos_x2;
+	wire [9:0]enemy_pos_y2;
+	wire [2:0]enemy_data2;
+	reg enable2;
+	wire collision2;
+	Enemy enemy2(vga_clk,enemy_clk,reset,enable2, right_pos,0,hcount, vcount,collision2,enemy_pos_x2,enemy_pos_y2,enemy_data2);
 	//Enemy enemy2(vga_clk,enemy_clk,reset, right_pos,0,hcount, vcount,enemy_pos_x,enemy_pos_y,enemy_data);
 	
 	//Collision validation
@@ -69,6 +78,7 @@ module Main(
 	assign car_pos_x = offset_car_x;
 	assign car_pos_y = offset_car_y;
 	ALU alu(enemy_clk,e_pos_x, e_pos_y, car_pos_x, car_pos_y,collision);
+	ALU alu2(enemy_clk,enemy_pos_x2, enemy_pos_y2, car_pos_x, car_pos_y,collision2);
 	
 	//setting image Bars
 	rom_Bars rom2(address_bars_left,data_Bars_l);
@@ -76,6 +86,23 @@ module Main(
 	
 	//VGA instantiate
 	VGA_LOGIC vga(vga_clk,data,red_out,green_out,blue_out,hsync,vsync,hcount, vcount);
+	
+	always @(posedge enemy_clk)
+	begin
+		if(enemy_pos_y>=600)
+		begin
+			enable=1;
+		end
+		else if(enemy_pos_y2>=600)
+		begin
+			enable2=1;
+		end
+		else
+		begin
+			enable2=0;
+			enable =0;
+		end
+	end
 	
 	always @(posedge logic_clk)
 	begin
@@ -147,6 +174,13 @@ module Main(
 					if(hcount >= enemy_pos_x && hcount < enemy_pos_x+80)
 					begin
 						data =enemy_data;
+					end
+				end
+				if(vcount >= enemy_pos_y2 && vcount < enemy_pos_y2+121)
+				begin
+					if(hcount >= enemy_pos_x2 && hcount < enemy_pos_x2+80)
+					begin
+						data =enemy_data2;
 					end
 				end
 			end //if hcount < 640
