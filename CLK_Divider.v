@@ -2,6 +2,7 @@
 
 module CLK_Divider(
     input clk,
+	 input[24:0] acelerator,
 	 output clk1hz
 	 );
 	 
@@ -17,7 +18,7 @@ module CLK_Divider(
 	 
 		counter = counter +1;
 		
-		if(counter == (counter_limit))
+		if(counter == (counter_limit - acelerator))
 		begin
 			clk1hz_buff = !clk1hz_buff;
 			counter = 25'h0;

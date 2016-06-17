@@ -1,59 +1,13 @@
 ISim log file
-Running: C:\Users\Raim\Documents\Laboratorio\RaceGear\RandomTb_isim_beh.exe -intstyle ise -gui -tclbatch isim.cmd -wdb C:/Users/Raim/Documents/Laboratorio/RaceGear/RandomTb_isim_beh.wdb 
+Running: C:\Users\Raim\Documents\Laboratorio\RaceGear\testbench_isim_beh.exe -intstyle ise -gui -tclbatch isim.cmd -wdb C:/Users/Raim/Documents/Laboratorio/RaceGear/testbench_isim_beh.wdb 
 ISim P.20131013 (signature 0x8ef4fb42)
 This is a Full version of ISim.
-WARNING: File "C:/Users/Raim/Documents/Laboratorio/RaceGear/RandomTb.v" Line 5.  For instance RandomTb/random/, width 1 of formal port clk is not equal to width 4 of actual variable seed. 
-WARNING: File "C:/Users/Raim/Documents/Laboratorio/RaceGear/RandomTb.v" Line 6.  For instance RandomTb/random/, width 4 of formal port seed is not equal to width 1 of actual variable load. 
+WARNING:  For instance m/clk/, width 25 of formal port acelerator is not equal to width 32 of actual constant.
+WARNING:  For instance m/enemy/, width 10 of formal port offset_x is not equal to width 9 of actual constant.
+WARNING:  For instance m/enemy2/, width 10 of formal port offset_x is not equal to width 9 of actual constant.
 Time resolution is 1 ps
 # onerror resume
 # wave add /
-# run 8400 us
-Simulator is doing circuit initialization process.
-Finished circuit initialization process.
-ISim P.20131013 (signature 0x8ef4fb42)
-This is a Full version of ISim.
-WARNING: File "C:/Users/Raim/Documents/Laboratorio/RaceGear/RandomTb.v" Line 5.  For instance RandomTb/random/, width 1 of formal port clk is not equal to width 4 of actual variable seed. 
-WARNING: File "C:/Users/Raim/Documents/Laboratorio/RaceGear/RandomTb.v" Line 6.  For instance RandomTb/random/, width 4 of formal port seed is not equal to width 1 of actual variable load. 
-# run 8400 us
-Simulator is doing circuit initialization process.
-Finished circuit initialization process.
-ISim P.20131013 (signature 0x8ef4fb42)
-This is a Full version of ISim.
-WARNING: File "C:/Users/Raim/Documents/Laboratorio/RaceGear/RandomTb.v" Line 5.  For instance RandomTb/random/, width 1 of formal port clk is not equal to width 4 of actual variable seed. 
-WARNING: File "C:/Users/Raim/Documents/Laboratorio/RaceGear/RandomTb.v" Line 6.  For instance RandomTb/random/, width 4 of formal port seed is not equal to width 1 of actual variable load. 
-# run 8400 us
-Simulator is doing circuit initialization process.
-Finished circuit initialization process.
-ISim P.20131013 (signature 0x8ef4fb42)
-This is a Full version of ISim.
-WARNING: File "C:/Users/Raim/Documents/Laboratorio/RaceGear/RandomTb.v" Line 5.  For instance RandomTb/random/, width 1 of formal port clk is not equal to width 4 of actual variable seed. 
-WARNING: File "C:/Users/Raim/Documents/Laboratorio/RaceGear/RandomTb.v" Line 6.  For instance RandomTb/random/, width 4 of formal port seed is not equal to width 1 of actual variable load. 
-# run 8400 us
-Simulator is doing circuit initialization process.
-Finished circuit initialization process.
-ISim P.20131013 (signature 0x8ef4fb42)
-This is a Full version of ISim.
-WARNING: File "C:/Users/Raim/Documents/Laboratorio/RaceGear/RandomTb.v" Line 5.  For instance RandomTb/random/, width 1 of formal port clk is not equal to width 4 of actual variable seed. 
-WARNING: File "C:/Users/Raim/Documents/Laboratorio/RaceGear/RandomTb.v" Line 6.  For instance RandomTb/random/, width 4 of formal port seed is not equal to width 1 of actual variable load. 
-# run 8400 us
-Simulator is doing circuit initialization process.
-Finished circuit initialization process.
-ISim P.20131013 (signature 0x8ef4fb42)
-This is a Full version of ISim.
-WARNING: File "C:/Users/Raim/Documents/Laboratorio/RaceGear/RandomTb.v" Line 5.  For instance RandomTb/random/, width 1 of formal port clk is not equal to width 4 of actual variable seed. 
-WARNING: File "C:/Users/Raim/Documents/Laboratorio/RaceGear/RandomTb.v" Line 6.  For instance RandomTb/random/, width 4 of formal port seed is not equal to width 1 of actual variable load. 
-# run 8400 us
-Simulator is doing circuit initialization process.
-Finished circuit initialization process.
-ISim P.20131013 (signature 0x8ef4fb42)
-This is a Full version of ISim.
-WARNING: File "C:/Users/Raim/Documents/Laboratorio/RaceGear/RandomTb.v" Line 5.  For instance RandomTb/random/, width 1 of formal port clk is not equal to width 4 of actual variable seed. 
-WARNING: File "C:/Users/Raim/Documents/Laboratorio/RaceGear/RandomTb.v" Line 6.  For instance RandomTb/random/, width 4 of formal port seed is not equal to width 1 of actual variable load. 
-# run 8400 us
-Simulator is doing circuit initialization process.
-Finished circuit initialization process.
-ISim P.20131013 (signature 0x8ef4fb42)
-This is a Full version of ISim.
 # run 8400 us
 Simulator is doing circuit initialization process.
 Finished circuit initialization process.

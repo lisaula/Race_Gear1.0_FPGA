@@ -30,15 +30,18 @@ module Enemy(
 				counter = counter +1;
 			end
 			else begin
-				pos_y =offset_y;
+				pos_y =pos_y;
 			end
 			if(enable)
 			begin
-				if(pos_y>=600)
+				if(pos_y==600)
 				begin
 					pos_y=0;
 					counter=0;
 				end
+			end
+			else begin
+				pos_y=620;
 			end
 		end
 		if(reset)

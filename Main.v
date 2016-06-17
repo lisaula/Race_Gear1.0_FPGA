@@ -39,7 +39,7 @@ module Main(
 	DCM vga_clock_dcm (.CLKIN(clk50mhz),.CLKFX(vga_clk));
 	
 	
-	CLK_Divider #(.counter_limit(31'h2625a0))clk(.clk(clk50mhz),.clk1hz(logic_clk));
+	CLK_Divider #(.counter_limit(31'h2625a0))clk(.clk(clk50mhz),.acelerator(0),.clk1hz(logic_clk));
 	//setting image CarBlue
 	rom_Car rom(address,data_pix);
 	
@@ -53,12 +53,15 @@ module Main(
 	
 	//setting enemies
 	wire enemy_clk;
-	//clock for pull down the enemies
-	CLK_Divider #(.counter_limit(31'h186a0))clk_enemy(.clk(clk50mhz),.clk1hz(enemy_clk));
+	reg[24:0] acelerator_enemy;
+	//clock for pull down the enemies 
+	CLK_Divider #(.counter_limit(25'h186a0))clk_enemy(.clk(clk50mhz),.acelerator(acelerator_enemy),.clk1hz(enemy_clk));
 	//clk for spawning the enemies
-	reg count_e;
+	//reg count_e;
 	wire spawn_clk;
-	Spawn_clk spawn(clk50mhz,count_e,spawn_clk);
+	reg[24:0] acelerator_spawn;
+	CLK_Divider #(.counter_limit(25'h2625a0))clk_spawn(.clk(clk50mhz),.acelerator(acelerator_spawn),.clk1hz(spawn_clk));
+	//Spawn_clk spawn(clk50mhz,count_e,spawn_clk);
 	//1
 	wire [9:0]enemy_pos_x;
 	wire [9:0]enemy_pos_y;
@@ -94,7 +97,7 @@ module Main(
 	
 	//VGA instantiate
 	VGA_LOGIC vga(vga_clk,data,red_out,green_out,blue_out,hsync,vsync,hcount, vcount);
-	reg [4:0]counter; 
+	reg [5:0]counter; 
 	reg ce;
 	always @(posedge spawn_clk)
 	begin
@@ -108,10 +111,21 @@ module Main(
 		end
 		else if(counter == 15)
 		begin
-			counter = 0;
-			ce=0;
+			//ce=0;
 			enable2=1;
 			active_pos2 = initial_pos;
+		end
+		else if(counter == 50) // acelerar
+		begin
+			counter = 0;
+			
+			acelerator_spawn = acelerator_spawn + 1000;
+			if(acelerator_spawn >= 25'h2625a0)
+				acelerator_spawn = 0;
+				
+			acelerator_enemy = acelerator_enemy + 1000;
+			if(acelerator_enemy >= 25'h186a0)
+				acelerator_enemy = 0;
 		end
 		else if (reset)
 		begin
@@ -164,11 +178,11 @@ module Main(
 							end
 				else if(reset) begin
 					offset_car_x = 279;
-					count_e=1;
+					//count_e=1;
 				end
 			end else if(reset) begin
 				offset_car_x = 279;
-				count_e =1;
+				//count_e =1;
 			end
 	end
 	
