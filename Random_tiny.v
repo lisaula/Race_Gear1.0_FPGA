@@ -1,3 +1,4 @@
+`timescale 1ns / 1ps
 module Random_tiny(q, clk, seed, load);
 	output q;
 	input [3:0] seed;
@@ -19,5 +20,8 @@ module Random_tiny(q, clk, seed, load);
 			r = {nextBit,r[3:1]};
 		end
 	end
-
-endmodule
+	initial
+	begin
+		r=0;
+	end
+endmodule 

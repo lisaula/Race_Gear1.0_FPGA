@@ -47,25 +47,34 @@ module Main(
 	parameter 
 		left_pos = 9'hc5,
 		center_pos = 9'h117,
-		right_pos =9'h169;
+		right_pos =9'h169,
+		initial_pos = 10'h0,
+		end_pos=10'h26c;
 	
 	//setting enemies
 	wire enemy_clk;
+	//clock for pull down the enemies
 	CLK_Divider #(.counter_limit(31'h186a0))clk_enemy(.clk(clk50mhz),.clk1hz(enemy_clk));
+	//clk for spawning the enemies
+	reg count_e;
+	wire spawn_clk;
+	Spawn_clk spawn(clk50mhz,count_e,spawn_clk);
+	//1
 	wire [9:0]enemy_pos_x;
 	wire [9:0]enemy_pos_y;
 	wire [2:0]enemy_data;
 	wire collision;
 	reg enable;
-	Enemy enemy(vga_clk,enemy_clk,reset,enable, left_pos,0,hcount, vcount,collision,enemy_pos_x,enemy_pos_y,enemy_data);
+	reg [9:0]active_pos;
+	Enemy enemy(vga_clk,enemy_clk,reset,enable, left_pos,active_pos,hcount, vcount,collision,enemy_pos_x,enemy_pos_y,enemy_data);
 	
 	//2
 	wire [9:0]enemy_pos_x2;
 	wire [9:0]enemy_pos_y2;
 	wire [2:0]enemy_data2;
 	reg enable2;
-	wire collision2;
-	Enemy enemy2(vga_clk,enemy_clk,reset,enable2, right_pos,0,hcount, vcount,collision2,enemy_pos_x2,enemy_pos_y2,enemy_data2);
+	reg [9:0]active_pos2;
+	Enemy enemy2(vga_clk,enemy_clk,reset,enable2, right_pos,active_pos2,hcount, vcount,collision,enemy_pos_x2,enemy_pos_y2,enemy_data2);
 	//Enemy enemy2(vga_clk,enemy_clk,reset, right_pos,0,hcount, vcount,enemy_pos_x,enemy_pos_y,enemy_data);
 	
 	//Collision validation
@@ -77,8 +86,7 @@ module Main(
 	assign e_pos_y = enemy_pos_y;
 	assign car_pos_x = offset_car_x;
 	assign car_pos_y = offset_car_y;
-	ALU alu(enemy_clk,e_pos_x, e_pos_y, car_pos_x, car_pos_y,collision);
-	ALU alu2(enemy_clk,enemy_pos_x2, enemy_pos_y2, car_pos_x, car_pos_y,collision2);
+	ALU alu(enemy_clk,reset,e_pos_x, e_pos_y,enemy_pos_x2,enemy_pos_y2, car_pos_x, car_pos_y,collision);
 	
 	//setting image Bars
 	rom_Bars rom2(address_bars_left,data_Bars_l);
@@ -86,14 +94,43 @@ module Main(
 	
 	//VGA instantiate
 	VGA_LOGIC vga(vga_clk,data,red_out,green_out,blue_out,hsync,vsync,hcount, vcount);
-	
-	always @(posedge enemy_clk)
+	reg [4:0]counter; 
+	reg ce;
+	always @(posedge spawn_clk)
 	begin
-		if(enemy_pos_y>=600)
+		if(ce)begin
+			counter =counter+1;
+		end
+		if(counter==1)
+		begin
+			enable =1;
+			active_pos= initial_pos;
+		end
+		else if(counter == 15)
+		begin
+			counter = 0;
+			ce=0;
+			enable2=1;
+			active_pos2 = initial_pos;
+		end
+		else if (reset)
+		begin
+			ce =1;
+			active_pos2 = end_pos;
+			active_pos=end_pos;
+			counter=0;
+			enable =0;
+			enable2=0;
+		end
+	end
+	
+	/*always @(posedge enemy_clk)
+	begin
+		if(enemy_pos_y==600)
 		begin
 			enable=1;
 		end
-		else if(enemy_pos_y2>=600)
+		else if(enemy_pos_y2==600)
 		begin
 			enable2=1;
 		end
@@ -102,30 +139,37 @@ module Main(
 			enable2=0;
 			enable =0;
 		end
-	end
+	end*/
 	
 	always @(posedge logic_clk)
 	begin
-		offset_car_y = 357;
-		if(left) begin
-					if(offset_car_x == 279) begin
-							offset_car_x = 197;
-						end
-					else if(offset_car_x == 361) begin
-							offset_car_x = 279;
-						end
-					end
-		else if(right) begin
-					if(offset_car_x == 279) begin
-							offset_car_x = 361;
-						end
-					else if(offset_car_x == 197) begin
-							offset_car_x = 279;
-						end
-					end
-		else if(reset) begin
-						offset_car_x = 279;
-					end
+		if(!collision)
+		begin
+				offset_car_y = 357;
+				if(left) begin
+							if(offset_car_x == 279) begin
+									offset_car_x = 197;
+								end
+							else if(offset_car_x == 361) begin
+									offset_car_x = 279;
+								end
+							end
+				else if(right) begin
+							if(offset_car_x == 279) begin
+									offset_car_x = 361;
+								end
+							else if(offset_car_x == 197) begin
+									offset_car_x = 279;
+								end
+							end
+				else if(reset) begin
+					offset_car_x = 279;
+					count_e=1;
+				end
+			end else if(reset) begin
+				offset_car_x = 279;
+				count_e =1;
+			end
 	end
 	
 	always @(posedge vga_clk)

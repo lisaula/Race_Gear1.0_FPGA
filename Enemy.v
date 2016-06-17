@@ -29,17 +29,22 @@ module Enemy(
 				pos_y =offset_y+counter;
 				counter = counter +1;
 			end
+			else begin
+				pos_y =offset_y;
+			end
+			if(enable)
+			begin
+				if(pos_y>=600)
+				begin
+					pos_y=0;
+					counter=0;
+				end
+			end
 		end
 		if(reset)
 		begin
 			counter=0;
-			pos_y=0;
-		end
-		
-		if(enable)
-		begin
-			counter=0;
-			pos_y=0;
+			pos_y=620;
 		end
 	end
 	
