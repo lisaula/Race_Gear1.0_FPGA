@@ -26,7 +26,7 @@ module Enemy(
 	begin
 		if(!collision)
 		begin
-			if(offset_y+counter < 601)
+			if(pos_y < 601)
 			begin
 				pos_y =offset_y+counter;
 				counter = counter +1;
@@ -38,7 +38,7 @@ module Enemy(
 			begin
 				if(pos_y==600)
 				begin
-					pos_y=0;
+					pos_y=620;
 					counter=0;
 				end
 			end
