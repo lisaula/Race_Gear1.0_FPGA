@@ -114,6 +114,7 @@ module Main(
 	VGA_LOGIC vga(vga_clk,data,red_out,green_out,blue_out,hsync,vsync,hcount, vcount);
 	reg [5:0]counter; 
 	reg ce;
+	reg [1:0]estates;
 	always @(posedge spawn_clk)
 	begin
 	
@@ -124,15 +125,21 @@ module Main(
 		if(counter==1)
 		begin
 			//enable =1;
-			active_pos= initial_pos;
-			active_posx1 = left_pos;
+			if(!estates[0]) begin
+				estates[0]=1;
+				active_pos= initial_pos;
+				active_posx1 = left_pos;
+			end
 		end
-		else if(counter == 15)
+		else if(counter == 1)
 		begin
 			//ce=0;
 			//enable2=1;
-			active_pos2 = initial_pos;
-			active_posx2=right_pos;
+			if(!estates[1]) begin
+				estates[1]=1;
+				active_pos2 = initial_pos;
+				active_posx2=right_pos;
+			end
 		end
 		else if(counter == 50) // acelerar
 		begin
@@ -144,6 +151,7 @@ module Main(
 		end
 		else if (reset)
 		begin
+			acelerator_enemy=0;
 			ce =1;
 			active_pos2 = end_pos;
 			active_pos=end_pos;
@@ -151,6 +159,19 @@ module Main(
 			enable =0;
 			enable2=0;
 			load=1;
+			estates=2'b0;
+		end
+		enable=0;
+		enable2=0;
+		if(enemy_pos_y==620) begin
+			active_posx1 = x0;
+			active_pos = y0;
+			enable = 1;
+		end
+		if(enemy_pos_y2==620) begin
+			active_posx2 = x1;
+			active_pos2 = y1;
+			enable2 = 1;
 		end
 	end
 	
