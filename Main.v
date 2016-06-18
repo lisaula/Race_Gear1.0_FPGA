@@ -59,8 +59,7 @@ module Main(
 	//clk for spawning the enemies
 	//reg count_e;
 	wire spawn_clk;
-	reg[24:0] acelerator_spawn;
-	CLK_Divider #(.counter_limit(25'h2625a0))clk_spawn(.clk(clk50mhz),.acelerator(acelerator_spawn),.clk1hz(spawn_clk));
+	CLK_Divider #(.counter_limit(25'h2625a0))clk_spawn(.clk(clk50mhz),.acelerator(0),.clk1hz(spawn_clk));
 	//Spawn_clk spawn(clk50mhz,count_e,spawn_clk);
 	//1
 	wire [9:0]enemy_pos_x;
@@ -69,7 +68,8 @@ module Main(
 	wire collision;
 	reg enable;
 	reg [9:0]active_pos;
-	Enemy enemy(vga_clk,enemy_clk,reset,enable, left_pos,active_pos,hcount, vcount,collision,enemy_pos_x,enemy_pos_y,enemy_data);
+	reg [9:0]active_posx1;
+	Enemy enemy(vga_clk,enemy_clk,reset,enable, active_posx1,active_pos,hcount, vcount,collision,enemy_pos_x,enemy_pos_y,enemy_data);
 	
 	//2
 	wire [9:0]enemy_pos_x2;
@@ -77,7 +77,8 @@ module Main(
 	wire [2:0]enemy_data2;
 	reg enable2;
 	reg [9:0]active_pos2;
-	Enemy enemy2(vga_clk,enemy_clk,reset,enable2, right_pos,active_pos2,hcount, vcount,collision,enemy_pos_x2,enemy_pos_y2,enemy_data2);
+	reg [9:0]active_posx2;
+	Enemy enemy2(vga_clk,enemy_clk,reset,enable2, active_posx2,active_pos2,hcount, vcount,collision,enemy_pos_x2,enemy_pos_y2,enemy_data2);
 	//Enemy enemy2(vga_clk,enemy_clk,reset, right_pos,0,hcount, vcount,enemy_pos_x,enemy_pos_y,enemy_data);
 	
 	//Collision validation
@@ -91,6 +92,20 @@ module Main(
 	assign car_pos_y = offset_car_y;
 	ALU alu(enemy_clk,reset,e_pos_x, e_pos_y,enemy_pos_x2,enemy_pos_y2, car_pos_x, car_pos_y,collision);
 	
+	//Setting Random
+	wire [2:0]q;
+	reg load;
+	Random_tiny rand1(q[2],spawn_clk,4'b0001,load);
+	Random_tiny rand2(q[1],spawn_clk,4'b0011,load);
+	Random_tiny rand3(q[0],spawn_clk,4'b1001,load);
+	
+	//setting position Rom
+	wire [9:0]x0;
+	wire [9:0]y0;
+	wire [9:0]x1;
+	wire [9:0]y1;
+	Rom_Position rom_pos(q,x0,y0,x1,y1);
+	
 	//setting image Bars
 	rom_Bars rom2(address_bars_left,data_Bars_l);
 	rom_Bars rom3(address_bars_right,data_Bars_r);
@@ -101,27 +116,27 @@ module Main(
 	reg ce;
 	always @(posedge spawn_clk)
 	begin
+	
+		load=0;
 		if(ce)begin
 			counter =counter+1;
 		end
 		if(counter==1)
 		begin
-			enable =1;
+			//enable =1;
 			active_pos= initial_pos;
+			active_posx1 = left_pos;
 		end
 		else if(counter == 15)
 		begin
 			//ce=0;
-			enable2=1;
+			//enable2=1;
 			active_pos2 = initial_pos;
+			active_posx2=right_pos;
 		end
 		else if(counter == 50) // acelerar
 		begin
 			counter = 0;
-			
-			acelerator_spawn = acelerator_spawn + 1000;
-			if(acelerator_spawn >= 25'h2625a0)
-				acelerator_spawn = 0;
 				
 			acelerator_enemy = acelerator_enemy + 1000;
 			if(acelerator_enemy >= 25'h186a0)
@@ -135,6 +150,7 @@ module Main(
 			counter=0;
 			enable =0;
 			enable2=0;
+			load=1;
 		end
 	end
 	

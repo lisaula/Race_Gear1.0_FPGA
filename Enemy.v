@@ -24,21 +24,14 @@ module Enemy(
 	begin
 		if(!collision)
 		begin
-			if(offset_y +counter < 601)
+			if(enable) begin
+				counter = 0;
+			end
+		
+			if(offset_y+counter < 601)
 			begin
 				pos_y =offset_y+counter;
 				counter = counter +1;
-			end
-			else begin
-				pos_y =pos_y;
-			end
-			if(enable)
-			begin
-				if(pos_y==600)
-				begin
-					pos_y=0;
-					counter=0;
-				end
 			end
 			else begin
 				pos_y=620;

@@ -4,13 +4,13 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.09 secs
+Total CPU time to Xst completion: 0.13 secs
  
 --> Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.09 secs
+Total CPU time to Xst completion: 0.13 secs
  
 --> Reading design: Main.prj
 
@@ -107,10 +107,14 @@ Slice Utilization Ratio Delta      : 5
 Compiling verilog file "rom_Car.v" in library work
 Compiling verilog file "VGA_LOGIC.v" in library work
 Module <rom_Car> compiled
-Compiling verilog file "rom_Bars.v" in library work
+Compiling verilog file "Rom_Position.v" in library work
 Module <VGA_LOGIC> compiled
-Compiling verilog file "Enemy.v" in library work
+Compiling verilog file "rom_Bars.v" in library work
+Module <Rom_Position> compiled
+Compiling verilog file "Random_tiny.v" in library work
 Module <rom_Bars> compiled
+Compiling verilog file "Enemy.v" in library work
+Module <Random_tiny> compiled
 Compiling verilog file "CLK_Divider.v" in library work
 Module <Enemy> compiled
 Compiling verilog file "ALU.v" in library work
@@ -146,6 +150,10 @@ Analyzing hierarchy for module <CLK_Divider> in library <work> with parameters.
 Analyzing hierarchy for module <Enemy> in library <work>.
 
 Analyzing hierarchy for module <ALU> in library <work>.
+
+Analyzing hierarchy for module <Random_tiny> in library <work>.
+
+Analyzing hierarchy for module <Rom_Position> in library <work>.
 
 Analyzing hierarchy for module <rom_Bars> in library <work>.
 
@@ -207,6 +215,12 @@ Module <Enemy> is correct for synthesis.
 Analyzing module <ALU> in library <work>.
 Module <ALU> is correct for synthesis.
  
+Analyzing module <Random_tiny> in library <work>.
+Module <Random_tiny> is correct for synthesis.
+ 
+Analyzing module <Rom_Position> in library <work>.
+Module <Rom_Position> is correct for synthesis.
+ 
 Analyzing module <rom_Bars> in library <work>.
 INFO:Xst:2546 - "rom_Bars.v" line 12: reading initialization file "lineas.mif".
 WARNING:Xst:905 - "rom_Bars.v" line 9: One or more signals are missing in the sensitivity list of always block. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
@@ -222,7 +236,11 @@ Module <VGA_LOGIC> is correct for synthesis.
 =========================================================================
 
 Performing bidirectional port resolution...
+INFO:Xst:2679 - Register <active_posx1> in unit <Main> has a constant value of 0011000101 during circuit operation. The register is replaced by logic.
+INFO:Xst:2679 - Register <active_posx2> in unit <Main> has a constant value of 0101101001 during circuit operation. The register is replaced by logic.
 INFO:Xst:2679 - Register <ce> in unit <Main> has a constant value of 1 during circuit operation. The register is replaced by logic.
+INFO:Xst:2679 - Register <enable> in unit <Main> has a constant value of 0 during circuit operation. The register is replaced by logic.
+INFO:Xst:2679 - Register <enable2> in unit <Main> has a constant value of 0 during circuit operation. The register is replaced by logic.
 INFO:Xst:2679 - Register <offset_car_y> in unit <Main> has a constant value of 0101100101 during circuit operation. The register is replaced by logic.
 
 Synthesizing Unit <CLK_Divider_1>.
@@ -264,16 +282,12 @@ Unit <CLK_Divider_2> synthesized.
 Synthesizing Unit <CLK_Divider_3>.
     Related source file is "CLK_Divider.v".
     Found 1-bit register for signal <clk1hz_buff>.
-    Found 25-bit comparator equal for signal <clk1hz_buff$cmp_eq0000> created at line 21.
     Found 25-bit up counter for signal <counter>.
-    Found 25-bit comparator equal for signal <counter$cmp_eq0000> created at line 21.
-    Found 25-bit adder for signal <counter$sub0000> created at line 21.
     Found 25-bit adder for signal <old_counter_7$add0000> created at line 19.
     Summary:
 	inferred   1 Counter(s).
 	inferred   1 D-type flip-flop(s).
-	inferred   2 Adder/Subtractor(s).
-	inferred   2 Comparator(s).
+	inferred   1 Adder/Subtractor(s).
 Unit <CLK_Divider_3> synthesized.
 
 
@@ -306,6 +320,20 @@ Synthesizing Unit <ALU>.
 	inferred   5 Adder/Subtractor(s).
 	inferred  16 Comparator(s).
 Unit <ALU> synthesized.
+
+
+Synthesizing Unit <Random_tiny>.
+    Related source file is "Random_tiny.v".
+    Found 1-bit xor2 for signal <nextBit>.
+    Found 4-bit register for signal <r>.
+    Summary:
+	inferred   4 D-type flip-flop(s).
+Unit <Random_tiny> synthesized.
+
+
+Synthesizing Unit <Rom_Position>.
+    Related source file is "Rom_Position.v".
+Unit <Rom_Position> synthesized.
 
 
 Synthesizing Unit <rom_Bars>.
@@ -346,88 +374,88 @@ Synthesizing Unit <Enemy>.
     Related source file is "Enemy.v".
     Found 10-bit register for signal <pos_y>.
     Found 3-bit register for signal <data>.
-    Found 10-bit adder carry out for signal <add0000$addsub0000> created at line 61.
-    Found 10-bit adder carry out for signal <add0001$addsub0000> created at line 63.
+    Found 10-bit adder carry out for signal <add0000$addsub0000> created at line 54.
+    Found 10-bit adder carry out for signal <add0001$addsub0000> created at line 56.
     Found 14-bit up counter for signal <address>.
-    Found 10-bit comparator greatequal for signal <address$cmp_ge0000> created at line 61.
-    Found 11-bit comparator greatequal for signal <address$cmp_ge0001> created at line 63.
-    Found 10-bit comparator greatequal for signal <address$cmp_ge0002> created at line 59.
-    Found 10-bit comparator greatequal for signal <address$cmp_ge0003> created at line 57.
-    Found 11-bit comparator less for signal <address$cmp_lt0000> created at line 61.
-    Found 10-bit comparator less for signal <address$cmp_lt0001> created at line 59.
-    Found 10-bit comparator less for signal <address$cmp_lt0002> created at line 57.
-    Found 10-bit comparator less for signal <address$cmp_lt0003> created at line 63.
-    Found 10-bit up counter for signal <counter>.
-    Found 11-bit comparator greatequal for signal <counter$cmp_ge0000> created at line 27.
-    Found 11-bit comparator greatequal for signal <data_0$cmp_ge0000> created at line 61.
-    Found 10-bit comparator less for signal <data_0$cmp_lt0000> created at line 61.
-    Found 10-bit adder for signal <old_pos_y_8$addsub0000> created at line 29.
-    Found 10-bit adder carry out for signal <old_pos_y_8$addsub0001> created at line 27.
-    Found 11-bit comparator less for signal <old_pos_y_8$cmp_lt0000> created at line 27.
+    Found 10-bit comparator greatequal for signal <address$cmp_ge0000> created at line 54.
+    Found 11-bit comparator greatequal for signal <address$cmp_ge0001> created at line 56.
+    Found 10-bit comparator greatequal for signal <address$cmp_ge0002> created at line 52.
+    Found 10-bit comparator greatequal for signal <address$cmp_ge0003> created at line 50.
+    Found 11-bit comparator less for signal <address$cmp_lt0000> created at line 54.
+    Found 10-bit comparator less for signal <address$cmp_lt0001> created at line 52.
+    Found 10-bit comparator less for signal <address$cmp_lt0002> created at line 50.
+    Found 10-bit comparator less for signal <address$cmp_lt0003> created at line 56.
+    Found 10-bit register for signal <counter>.
+    Found 10-bit adder for signal <counter$addsub0000> created at line 34.
+    Found 10-bit adder carry out for signal <counter$addsub0001> created at line 31.
+    Found 11-bit comparator less for signal <counter$cmp_lt0000> created at line 31.
+    Found 11-bit comparator greatequal for signal <data_0$cmp_ge0000> created at line 54.
+    Found 10-bit comparator less for signal <data_0$cmp_lt0000> created at line 54.
+    Found 10-bit adder for signal <pos_y$addsub0000> created at line 33.
     Summary:
-	inferred   2 Counter(s).
-	inferred  13 D-type flip-flop(s).
-	inferred   4 Adder/Subtractor(s).
-	inferred  12 Comparator(s).
+	inferred   1 Counter(s).
+	inferred  23 D-type flip-flop(s).
+	inferred   5 Adder/Subtractor(s).
+	inferred  11 Comparator(s).
 Unit <Enemy> synthesized.
 
 
 Synthesizing Unit <Main>.
     Related source file is "Main.v".
+WARNING:Xst:646 - Signal <y1> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <y0> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <x1> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <x0> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
     Found 25-bit up accumulator for signal <acelerator_enemy>.
-    Found 25-bit comparator greatequal for signal <acelerator_enemy$cmp_ge0000> created at line 127.
-    Found 25-bit up accumulator for signal <acelerator_spawn>.
-    Found 25-bit comparator greatequal for signal <acelerator_spawn$cmp_ge0000> created at line 123.
+    Found 25-bit comparator greatequal for signal <acelerator_enemy$cmp_ge0000> created at line 142.
     Found 10-bit register for signal <active_pos>.
     Found 10-bit register for signal <active_pos2>.
-    Found 10-bit adder carry out for signal <add0000$addsub0000> created at line 237.
-    Found 10-bit adder carry out for signal <add0001$addsub0000> created at line 239.
-    Found 10-bit adder carry out for signal <add0002$addsub0000> created at line 230.
-    Found 10-bit adder carry out for signal <add0003$addsub0000> created at line 232.
-    Found 10-bit adder carry out for signal <add0004$addsub0000> created at line 218.
+    Found 10-bit adder carry out for signal <add0000$addsub0000> created at line 253.
+    Found 10-bit adder carry out for signal <add0001$addsub0000> created at line 255.
+    Found 10-bit adder carry out for signal <add0002$addsub0000> created at line 246.
+    Found 10-bit adder carry out for signal <add0003$addsub0000> created at line 248.
+    Found 10-bit adder carry out for signal <add0004$addsub0000> created at line 234.
     Found 14-bit up counter for signal <address>.
-    Found 11-bit comparator greatequal for signal <address$cmp_ge0000> created at line 218.
-    Found 10-bit comparator less for signal <address$cmp_lt0000> created at line 193.
-    Found 10-bit comparator less for signal <address$cmp_lt0001> created at line 218.
+    Found 11-bit comparator greatequal for signal <address$cmp_ge0000> created at line 234.
+    Found 10-bit comparator less for signal <address$cmp_lt0000> created at line 209.
+    Found 10-bit comparator less for signal <address$cmp_lt0001> created at line 234.
     Found 14-bit up counter for signal <address_bars_left>.
-    Found 10-bit comparator less for signal <address_bars_left$cmp_lt0000> created at line 191.
-    Found 10-bit comparator less for signal <address_bars_left$cmp_lt0001> created at line 198.
+    Found 10-bit comparator less for signal <address_bars_left$cmp_lt0000> created at line 207.
+    Found 10-bit comparator less for signal <address_bars_left$cmp_lt0001> created at line 214.
     Found 14-bit up counter for signal <address_bars_right>.
-    Found 10-bit comparator greatequal for signal <address_bars_right$cmp_ge0000> created at line 205.
+    Found 10-bit comparator greatequal for signal <address_bars_right$cmp_ge0000> created at line 221.
     Found 6-bit register for signal <counter>.
     Found 3-bit register for signal <data>.
-    Found 10-bit comparator greatequal for signal <data_2$cmp_ge0000> created at line 193.
-    Found 10-bit comparator greatequal for signal <data_2$cmp_ge0001> created at line 191.
-    Found 10-bit comparator greatequal for signal <data_2$cmp_ge0002> created at line 237.
-    Found 10-bit comparator greatequal for signal <data_2$cmp_ge0003> created at line 230.
-    Found 10-bit comparator greatequal for signal <data_2$cmp_ge0004> created at line 216.
-    Found 10-bit comparator greatequal for signal <data_2$cmp_ge0005> created at line 212.
-    Found 10-bit comparator greatequal for signal <data_2$cmp_ge0006> created at line 198.
-    Found 10-bit comparator greatequal for signal <data_2$cmp_ge0007> created at line 205.
-    Found 10-bit comparator greatequal for signal <data_2$cmp_ge0008> created at line 218.
-    Found 10-bit comparator greatequal for signal <data_2$cmp_ge0009> created at line 232.
-    Found 10-bit comparator greatequal for signal <data_2$cmp_ge0010> created at line 239.
-    Found 11-bit comparator less for signal <data_2$cmp_lt0000> created at line 237.
-    Found 11-bit comparator less for signal <data_2$cmp_lt0001> created at line 230.
-    Found 11-bit comparator less for signal <data_2$cmp_lt0002> created at line 216.
-    Found 10-bit comparator less for signal <data_2$cmp_lt0003> created at line 212.
-    Found 10-bit comparator less for signal <data_2$cmp_lt0004> created at line 198.
-    Found 10-bit comparator less for signal <data_2$cmp_lt0005> created at line 205.
-    Found 11-bit comparator less for signal <data_2$cmp_lt0006> created at line 218.
-    Found 11-bit comparator less for signal <data_2$cmp_lt0007> created at line 232.
-    Found 11-bit comparator less for signal <data_2$cmp_lt0008> created at line 239.
-    Found 1-bit register for signal <enable>.
-    Found 1-bit register for signal <enable2>.
+    Found 10-bit comparator greatequal for signal <data_2$cmp_ge0000> created at line 209.
+    Found 10-bit comparator greatequal for signal <data_2$cmp_ge0001> created at line 207.
+    Found 10-bit comparator greatequal for signal <data_2$cmp_ge0002> created at line 253.
+    Found 10-bit comparator greatequal for signal <data_2$cmp_ge0003> created at line 246.
+    Found 10-bit comparator greatequal for signal <data_2$cmp_ge0004> created at line 232.
+    Found 10-bit comparator greatequal for signal <data_2$cmp_ge0005> created at line 228.
+    Found 10-bit comparator greatequal for signal <data_2$cmp_ge0006> created at line 214.
+    Found 10-bit comparator greatequal for signal <data_2$cmp_ge0007> created at line 221.
+    Found 10-bit comparator greatequal for signal <data_2$cmp_ge0008> created at line 234.
+    Found 10-bit comparator greatequal for signal <data_2$cmp_ge0009> created at line 248.
+    Found 10-bit comparator greatequal for signal <data_2$cmp_ge0010> created at line 255.
+    Found 11-bit comparator less for signal <data_2$cmp_lt0000> created at line 253.
+    Found 11-bit comparator less for signal <data_2$cmp_lt0001> created at line 246.
+    Found 11-bit comparator less for signal <data_2$cmp_lt0002> created at line 232.
+    Found 10-bit comparator less for signal <data_2$cmp_lt0003> created at line 228.
+    Found 10-bit comparator less for signal <data_2$cmp_lt0004> created at line 214.
+    Found 10-bit comparator less for signal <data_2$cmp_lt0005> created at line 221.
+    Found 11-bit comparator less for signal <data_2$cmp_lt0006> created at line 234.
+    Found 11-bit comparator less for signal <data_2$cmp_lt0007> created at line 248.
+    Found 11-bit comparator less for signal <data_2$cmp_lt0008> created at line 255.
+    Found 1-bit register for signal <load>.
     Found 10-bit register for signal <offset_car_x>.
-    Found 25-bit adder for signal <old_acelerator_enemy_3$add0000> created at line 126.
-    Found 25-bit adder for signal <old_acelerator_spawn_2$add0000> created at line 122.
-    Found 6-bit adder for signal <old_counter_1$add0000> created at line 105.
+    Found 25-bit adder for signal <old_acelerator_enemy_2$add0000> created at line 141.
+    Found 6-bit adder for signal <old_counter_1$add0000> created at line 122.
     Summary:
 	inferred   3 Counter(s).
-	inferred   2 Accumulator(s).
-	inferred  41 D-type flip-flop(s).
-	inferred   8 Adder/Subtractor(s).
-	inferred  28 Comparator(s).
+	inferred   1 Accumulator(s).
+	inferred  40 D-type flip-flop(s).
+	inferred   7 Adder/Subtractor(s).
+	inferred  27 Comparator(s).
 Unit <Main> synthesized.
 
 
@@ -438,30 +466,32 @@ Macro Statistics
 # ROMs                                                 : 5
  16384x3-bit ROM                                       : 5
 # Adders/Subtractors                                   : 28
- 10-bit adder                                          : 4
+ 10-bit adder                                          : 6
  10-bit adder carry out                                : 16
- 25-bit adder                                          : 7
+ 25-bit adder                                          : 5
  6-bit adder                                           : 1
-# Counters                                             : 10
- 10-bit up counter                                     : 2
+# Counters                                             : 8
  14-bit up counter                                     : 5
  25-bit up counter                                     : 3
-# Accumulators                                         : 2
- 25-bit up accumulator                                 : 2
-# Registers                                            : 29
- 1-bit register                                        : 20
- 10-bit register                                       : 7
+# Accumulators                                         : 1
+ 25-bit up accumulator                                 : 1
+# Registers                                            : 33
+ 1-bit register                                        : 19
+ 10-bit register                                       : 9
  3-bit register                                        : 1
+ 4-bit register                                        : 3
  6-bit register                                        : 1
-# Comparators                                          : 78
+# Comparators                                          : 73
  10-bit comparator greatequal                          : 26
  10-bit comparator less                                : 19
  10-bit comparator lessequal                           : 2
- 11-bit comparator greatequal                          : 9
+ 11-bit comparator greatequal                          : 7
  11-bit comparator less                                : 10
  11-bit comparator lessequal                           : 6
- 25-bit comparator equal                               : 4
- 25-bit comparator greatequal                          : 2
+ 25-bit comparator equal                               : 2
+ 25-bit comparator greatequal                          : 1
+# Xors                                                 : 3
+ 1-bit xor2                                            : 3
 
 =========================================================================
 
@@ -469,17 +499,25 @@ Macro Statistics
 *                       Advanced HDL Synthesis                          *
 =========================================================================
 
+WARNING:Xst:1290 - Hierarchical block <rand1> is unconnected in block <Main>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <rand2> is unconnected in block <Main>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <rand3> is unconnected in block <Main>.
+   It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <rom_pos> is unconnected in block <Main>.
+   It will be removed from the design.
 WARNING:Xst:1710 - FF/Latch <active_pos_0> (without init value) has a constant value of 0 in block <Main>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <active_pos_1> (without init value) has a constant value of 0 in block <Main>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <active_pos_4> (without init value) has a constant value of 0 in block <Main>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <active_pos_7> (without init value) has a constant value of 0 in block <Main>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <active_pos_8> (without init value) has a constant value of 0 in block <Main>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <offset_car_x_9> (without init value) has a constant value of 0 in block <Main>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <active_pos2_0> (without init value) has a constant value of 0 in block <Main>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <active_pos2_1> (without init value) has a constant value of 0 in block <Main>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <active_pos2_4> (without init value) has a constant value of 0 in block <Main>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <active_pos2_7> (without init value) has a constant value of 0 in block <Main>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <active_pos2_8> (without init value) has a constant value of 0 in block <Main>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <offset_car_x_9> (without init value) has a constant value of 0 in block <Main>. This FF/Latch will be trimmed during the optimization process.
 
 =========================================================================
 Advanced HDL Synthesis Report
@@ -488,34 +526,34 @@ Macro Statistics
 # ROMs                                                 : 5
  16384x3-bit ROM                                       : 5
 # Adders/Subtractors                                   : 28
- 10-bit adder                                          : 4
+ 10-bit adder                                          : 6
  10-bit adder carry out                                : 16
- 25-bit adder                                          : 7
+ 25-bit adder                                          : 5
  6-bit adder                                           : 1
-# Counters                                             : 10
- 10-bit up counter                                     : 2
+# Counters                                             : 8
  14-bit up counter                                     : 5
  25-bit up counter                                     : 3
-# Accumulators                                         : 2
- 25-bit up accumulator                                 : 2
-# Registers                                            : 99
- Flip-Flops                                            : 99
-# Comparators                                          : 78
+# Accumulators                                         : 1
+ 25-bit up accumulator                                 : 1
+# Registers                                            : 130
+ Flip-Flops                                            : 130
+# Comparators                                          : 73
  10-bit comparator greatequal                          : 26
  10-bit comparator less                                : 19
  10-bit comparator lessequal                           : 2
- 11-bit comparator greatequal                          : 9
+ 11-bit comparator greatequal                          : 7
  11-bit comparator less                                : 10
  11-bit comparator lessequal                           : 6
- 25-bit comparator equal                               : 4
- 25-bit comparator greatequal                          : 2
+ 25-bit comparator equal                               : 2
+ 25-bit comparator greatequal                          : 1
+# Xors                                                 : 3
+ 1-bit xor2                                            : 3
 
 =========================================================================
 
 =========================================================================
 *                         Low Level Synthesis                           *
 =========================================================================
-WARNING:Xst:1710 - FF/Latch <offset_car_x_9> (without init value) has a constant value of 0 in block <Main>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <active_pos_0> (without init value) has a constant value of 0 in block <Main>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <active_pos_1> (without init value) has a constant value of 0 in block <Main>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <active_pos_4> (without init value) has a constant value of 0 in block <Main>. This FF/Latch will be trimmed during the optimization process.
@@ -526,9 +564,20 @@ WARNING:Xst:1710 - FF/Latch <active_pos2_1> (without init value) has a constant 
 WARNING:Xst:1710 - FF/Latch <active_pos2_4> (without init value) has a constant value of 0 in block <Main>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <active_pos2_7> (without init value) has a constant value of 0 in block <Main>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <active_pos2_8> (without init value) has a constant value of 0 in block <Main>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <acelerator_spawn_0> (without init value) has a constant value of 0 in block <Main>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <acelerator_spawn_1> (without init value) has a constant value of 0 in block <Main>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <acelerator_spawn_2> (without init value) has a constant value of 0 in block <Main>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <offset_car_x_9> (without init value) has a constant value of 0 in block <Main>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:2677 - Node <load> of sequential type is unconnected in block <Main>.
+WARNING:Xst:2677 - Node <rand3/r_3> of sequential type is unconnected in block <Main>.
+WARNING:Xst:2677 - Node <rand3/r_2> of sequential type is unconnected in block <Main>.
+WARNING:Xst:2677 - Node <rand3/r_1> of sequential type is unconnected in block <Main>.
+WARNING:Xst:2677 - Node <rand3/r_0> of sequential type is unconnected in block <Main>.
+WARNING:Xst:2677 - Node <rand2/r_3> of sequential type is unconnected in block <Main>.
+WARNING:Xst:2677 - Node <rand2/r_2> of sequential type is unconnected in block <Main>.
+WARNING:Xst:2677 - Node <rand2/r_1> of sequential type is unconnected in block <Main>.
+WARNING:Xst:2677 - Node <rand2/r_0> of sequential type is unconnected in block <Main>.
+WARNING:Xst:2677 - Node <rand1/r_3> of sequential type is unconnected in block <Main>.
+WARNING:Xst:2677 - Node <rand1/r_2> of sequential type is unconnected in block <Main>.
+WARNING:Xst:2677 - Node <rand1/r_1> of sequential type is unconnected in block <Main>.
+WARNING:Xst:2677 - Node <rand1/r_0> of sequential type is unconnected in block <Main>.
 WARNING:Xst:1710 - FF/Latch <acelerator_enemy_0> (without init value) has a constant value of 0 in block <Main>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <acelerator_enemy_1> (without init value) has a constant value of 0 in block <Main>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <acelerator_enemy_2> (without init value) has a constant value of 0 in block <Main>. This FF/Latch will be trimmed during the optimization process.
@@ -539,17 +588,13 @@ WARNING:Xst:1710 - FF/Latch <offset_car_x_0> (without init value) has a constant
 
 Optimizing unit <CLK_Divider_2> ...
 
-Optimizing unit <CLK_Divider_3> ...
-
 Optimizing unit <ALU> ...
 
 Optimizing unit <VGA_LOGIC> ...
 
-Optimizing unit <Enemy> ...
-
 Mapping all equations...
 Building and optimizing final netlist ...
-Found area constraint ratio of 100 (+ 5) on block Main, actual ratio is 29.
+Found area constraint ratio of 100 (+ 5) on block Main, actual ratio is 26.
 
 Final Macro Processing ...
 
@@ -557,8 +602,8 @@ Final Macro Processing ...
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 296
- Flip-Flops                                            : 296
+# Registers                                            : 272
+ Flip-Flops                                            : 272
 
 =========================================================================
 
@@ -587,33 +632,32 @@ Design Statistics
 # IOs                              : 9
 
 Cell Usage :
-# BELS                             : 4100
+# BELS                             : 3570
 #      GND                         : 1
-#      INV                         : 196
-#      LUT1                        : 458
-#      LUT2                        : 216
-#      LUT2_D                      : 22
-#      LUT2_L                      : 11
-#      LUT3                        : 458
-#      LUT3_D                      : 38
-#      LUT3_L                      : 26
-#      LUT4                        : 848
-#      LUT4_D                      : 75
-#      LUT4_L                      : 41
-#      MULT_AND                    : 2
-#      MUXCY                       : 807
+#      INV                         : 95
+#      LUT1                        : 343
+#      LUT2                        : 235
+#      LUT2_D                      : 23
+#      LUT2_L                      : 7
+#      LUT3                        : 467
+#      LUT3_D                      : 37
+#      LUT3_L                      : 18
+#      LUT4                        : 814
+#      LUT4_D                      : 87
+#      LUT4_L                      : 44
+#      MUXCY                       : 570
 #      MUXF5                       : 336
 #      MUXF6                       : 62
 #      MUXF7                       : 11
 #      MUXF8                       : 3
 #      VCC                         : 1
-#      XORCY                       : 488
-# FlipFlops/Latches                : 296
-#      FD                          : 13
+#      XORCY                       : 416
+# FlipFlops/Latches                : 272
+#      FD                          : 12
 #      FDE                         : 23
 #      FDR                         : 90
-#      FDRE                        : 145
-#      FDS                         : 15
+#      FDRE                        : 123
+#      FDS                         : 14
 #      FDSE                        : 10
 # Clock Buffers                    : 4
 #      BUFG                        : 4
@@ -630,9 +674,9 @@ Device utilization summary:
 
 Selected Device : 3s500eft256-5 
 
- Number of Slices:                     1270  out of   4656    27%  
- Number of Slice Flip Flops:            296  out of   9312     3%  
- Number of 4 input LUTs:               2389  out of   9312    25%  
+ Number of Slices:                     1147  out of   4656    24%  
+ Number of Slice Flip Flops:            272  out of   9312     2%  
+ Number of 4 input LUTs:               2170  out of   9312    23%  
  Number of IOs:                           9
  Number of bonded IOBs:                   9  out of    190     4%  
  Number of GCLKs:                         4  out of     24    16%  
@@ -659,9 +703,9 @@ Clock Information:
 -----------------------------------+------------------------+-------+
 Clock Signal                       | Clock buffer(FF name)  | Load  |
 -----------------------------------+------------------------+-------+
+clk_spawn/clk1hz_buff1             | BUFG                   | 38    |
 clk/clk1hz_buff                    | NONE(offset_car_x_1)   | 8     |
 clk50mhz                           | vga_clock_dcm:CLKFX    | 107   |
-clk_spawn/clk1hz_buff1             | BUFG                   | 62    |
 clk50mhz                           | IBUFG+BUFG             | 78    |
 clk_enemy/clk1hz_buff1             | BUFG                   | 41    |
 -----------------------------------+------------------------+-------+
@@ -675,8 +719,8 @@ Timing Summary:
 ---------------
 Speed Grade: -5
 
-   Minimum period: 8.403ns (Maximum Frequency: 119.002MHz)
-   Minimum input arrival time before clock: 5.094ns
+   Minimum period: 8.357ns (Maximum Frequency: 119.657MHz)
+   Minimum input arrival time before clock: 5.133ns
    Maximum output required time after clock: 4.040ns
    Maximum combinational path delay: No path found
 
@@ -685,35 +729,81 @@ Timing Detail:
 All values displayed in nanoseconds (ns)
 
 =========================================================================
-Timing constraint: Default period analysis for Clock 'clk/clk1hz_buff'
-  Clock period: 6.616ns (frequency: 151.143MHz)
-  Total number of paths / destination ports: 291 / 8
+Timing constraint: Default period analysis for Clock 'clk_spawn/clk1hz_buff1'
+  Clock period: 8.357ns (frequency: 119.657MHz)
+  Total number of paths / destination ports: 6609 / 96
 -------------------------------------------------------------------------
-Delay:               6.616ns (Levels of Logic = 5)
-  Source:            offset_car_x_5 (FF)
-  Destination:       offset_car_x_1 (FF)
-  Source Clock:      clk/clk1hz_buff rising
-  Destination Clock: clk/clk1hz_buff rising
+Delay:               8.357ns (Levels of Logic = 25)
+  Source:            acelerator_enemy_4 (FF)
+  Destination:       acelerator_enemy_3 (FF)
+  Source Clock:      clk_spawn/clk1hz_buff1 rising
+  Destination Clock: clk_spawn/clk1hz_buff1 rising
 
-  Data Path: offset_car_x_5 to offset_car_x_1
+  Data Path: acelerator_enemy_4 to acelerator_enemy_3
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDE:C->Q             25   0.514   1.101  offset_car_x_5 (offset_car_x_5)
-     LUT3_D:I2->O          2   0.612   0.383  offset_car_x_cmp_eq000311 (offset_car_x_and0033)
-     LUT4_D:I3->O          1   0.612   0.360  offset_car_x_mux0000<7>21_SW0 (N96)
-     LUT4:I3->O            2   0.612   0.410  offset_car_x_mux0000<7>21 (N64)
-     LUT4:I2->O            3   0.612   0.520  offset_car_x_mux0000<7>2 (N13)
-     LUT3:I1->O            1   0.612   0.000  offset_car_x_mux0000<8>1 (offset_car_x_mux0000<8>)
-     FDE:D                     0.268          offset_car_x_1
+     FDRE:C->Q             3   0.514   0.603  acelerator_enemy_4 (acelerator_enemy_4)
+     LUT1:I0->O            1   0.612   0.000  Madd_old_acelerator_enemy_2_add0000_cy<4>_rt (Madd_old_acelerator_enemy_2_add0000_cy<4>_rt)
+     MUXCY:S->O            1   0.404   0.000  Madd_old_acelerator_enemy_2_add0000_cy<4> (Madd_old_acelerator_enemy_2_add0000_cy<4>)
+     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_enemy_2_add0000_cy<5> (Madd_old_acelerator_enemy_2_add0000_cy<5>)
+     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_enemy_2_add0000_cy<6> (Madd_old_acelerator_enemy_2_add0000_cy<6>)
+     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_enemy_2_add0000_cy<7> (Madd_old_acelerator_enemy_2_add0000_cy<7>)
+     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_enemy_2_add0000_cy<8> (Madd_old_acelerator_enemy_2_add0000_cy<8>)
+     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_enemy_2_add0000_cy<9> (Madd_old_acelerator_enemy_2_add0000_cy<9>)
+     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_enemy_2_add0000_cy<10> (Madd_old_acelerator_enemy_2_add0000_cy<10>)
+     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_enemy_2_add0000_cy<11> (Madd_old_acelerator_enemy_2_add0000_cy<11>)
+     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_enemy_2_add0000_cy<12> (Madd_old_acelerator_enemy_2_add0000_cy<12>)
+     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_enemy_2_add0000_cy<13> (Madd_old_acelerator_enemy_2_add0000_cy<13>)
+     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_enemy_2_add0000_cy<14> (Madd_old_acelerator_enemy_2_add0000_cy<14>)
+     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_enemy_2_add0000_cy<15> (Madd_old_acelerator_enemy_2_add0000_cy<15>)
+     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_enemy_2_add0000_cy<16> (Madd_old_acelerator_enemy_2_add0000_cy<16>)
+     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_enemy_2_add0000_cy<17> (Madd_old_acelerator_enemy_2_add0000_cy<17>)
+     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_enemy_2_add0000_cy<18> (Madd_old_acelerator_enemy_2_add0000_cy<18>)
+     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_enemy_2_add0000_cy<19> (Madd_old_acelerator_enemy_2_add0000_cy<19>)
+     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_enemy_2_add0000_cy<20> (Madd_old_acelerator_enemy_2_add0000_cy<20>)
+     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_enemy_2_add0000_cy<21> (Madd_old_acelerator_enemy_2_add0000_cy<21>)
+     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_enemy_2_add0000_cy<22> (Madd_old_acelerator_enemy_2_add0000_cy<22>)
+     MUXCY:CI->O           0   0.051   0.000  Madd_old_acelerator_enemy_2_add0000_cy<23> (Madd_old_acelerator_enemy_2_add0000_cy<23>)
+     XORCY:CI->O           1   0.699   0.360  Madd_old_acelerator_enemy_2_add0000_xor<24> (old_acelerator_enemy_2_add0000<24>)
+     LUT4:I3->O            1   0.612   0.000  Mcompar_acelerator_enemy_cmp_ge0000_lut<8> (Mcompar_acelerator_enemy_cmp_ge0000_lut<8>)
+     MUXCY:S->O            1   0.752   0.426  Mcompar_acelerator_enemy_cmp_ge0000_cy<8> (acelerator_enemy_cmp_ge0000)
+     LUT2:I1->O           22   0.612   0.989  acelerator_enemy_and00001 (acelerator_enemy_and0000)
+     FDRE:R                    0.795          acelerator_enemy_3
     ----------------------------------------
-    Total                      6.616ns (3.842ns logic, 2.774ns route)
-                                       (58.1% logic, 41.9% route)
+    Total                      8.357ns (5.979ns logic, 2.379ns route)
+                                       (71.5% logic, 28.5% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'clk/clk1hz_buff'
+  Clock period: 6.200ns (frequency: 161.299MHz)
+  Total number of paths / destination ports: 279 / 8
+-------------------------------------------------------------------------
+Delay:               6.200ns (Levels of Logic = 5)
+  Source:            offset_car_x_5 (FF)
+  Destination:       offset_car_x_3 (FF)
+  Source Clock:      clk/clk1hz_buff rising
+  Destination Clock: clk/clk1hz_buff rising
+
+  Data Path: offset_car_x_5 to offset_car_x_3
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDE:C->Q             20   0.514   1.006  offset_car_x_5 (offset_car_x_5)
+     LUT4:I1->O            1   0.612   0.360  offset_car_x_or0005_SW1 (N177)
+     LUT4:I3->O            4   0.612   0.502  offset_car_x_or0005 (offset_car_x_or0005)
+     LUT4:I3->O            1   0.612   0.360  offset_car_x_mux0000<3>7_SW0 (N299)
+     LUT4_L:I3->LO         1   0.612   0.130  offset_car_x_mux0000<3>7 (offset_car_x_mux0000<3>7)
+     LUT3:I2->O            1   0.612   0.000  offset_car_x_mux0000<3>37 (offset_car_x_mux0000<3>)
+     FDE:D                     0.268          offset_car_x_6
+    ----------------------------------------
+    Total                      6.200ns (3.842ns logic, 2.358ns route)
+                                       (62.0% logic, 38.0% route)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'clk50mhz'
   Clock period: 7.522ns (frequency: 132.940MHz)
-  Total number of paths / destination ports: 46022 / 428
+  Total number of paths / destination ports: 45396 / 428
 -------------------------------------------------------------------------
 Delay:               7.522ns (Levels of Logic = 27)
   Source:            clk/counter_1 (FF)
@@ -759,88 +849,65 @@ Delay:               7.522ns (Levels of Logic = 27)
                                        (71.9% logic, 28.1% route)
 
 =========================================================================
-Timing constraint: Default period analysis for Clock 'clk_spawn/clk1hz_buff1'
-  Clock period: 8.403ns (frequency: 119.002MHz)
-  Total number of paths / destination ports: 12588 / 165
--------------------------------------------------------------------------
-Delay:               8.403ns (Levels of Logic = 23)
-  Source:            acelerator_spawn_4 (FF)
-  Destination:       acelerator_spawn_3 (FF)
-  Source Clock:      clk_spawn/clk1hz_buff1 rising
-  Destination Clock: clk_spawn/clk1hz_buff1 rising
-
-  Data Path: acelerator_spawn_4 to acelerator_spawn_3
-                                Gate     Net
-    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
-    ----------------------------------------  ------------
-     FDRE:C->Q             3   0.514   0.603  acelerator_spawn_4 (acelerator_spawn_4)
-     LUT1:I0->O            1   0.612   0.000  Madd_old_acelerator_spawn_2_add0000_cy<4>_rt (Madd_old_acelerator_spawn_2_add0000_cy<4>_rt)
-     MUXCY:S->O            1   0.404   0.000  Madd_old_acelerator_spawn_2_add0000_cy<4> (Madd_old_acelerator_spawn_2_add0000_cy<4>)
-     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_spawn_2_add0000_cy<5> (Madd_old_acelerator_spawn_2_add0000_cy<5>)
-     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_spawn_2_add0000_cy<6> (Madd_old_acelerator_spawn_2_add0000_cy<6>)
-     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_spawn_2_add0000_cy<7> (Madd_old_acelerator_spawn_2_add0000_cy<7>)
-     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_spawn_2_add0000_cy<8> (Madd_old_acelerator_spawn_2_add0000_cy<8>)
-     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_spawn_2_add0000_cy<9> (Madd_old_acelerator_spawn_2_add0000_cy<9>)
-     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_spawn_2_add0000_cy<10> (Madd_old_acelerator_spawn_2_add0000_cy<10>)
-     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_spawn_2_add0000_cy<11> (Madd_old_acelerator_spawn_2_add0000_cy<11>)
-     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_spawn_2_add0000_cy<12> (Madd_old_acelerator_spawn_2_add0000_cy<12>)
-     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_spawn_2_add0000_cy<13> (Madd_old_acelerator_spawn_2_add0000_cy<13>)
-     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_spawn_2_add0000_cy<14> (Madd_old_acelerator_spawn_2_add0000_cy<14>)
-     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_spawn_2_add0000_cy<15> (Madd_old_acelerator_spawn_2_add0000_cy<15>)
-     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_spawn_2_add0000_cy<16> (Madd_old_acelerator_spawn_2_add0000_cy<16>)
-     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_spawn_2_add0000_cy<17> (Madd_old_acelerator_spawn_2_add0000_cy<17>)
-     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_spawn_2_add0000_cy<18> (Madd_old_acelerator_spawn_2_add0000_cy<18>)
-     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_spawn_2_add0000_cy<19> (Madd_old_acelerator_spawn_2_add0000_cy<19>)
-     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_spawn_2_add0000_cy<20> (Madd_old_acelerator_spawn_2_add0000_cy<20>)
-     MUXCY:CI->O           1   0.051   0.000  Madd_old_acelerator_spawn_2_add0000_cy<21> (Madd_old_acelerator_spawn_2_add0000_cy<21>)
-     XORCY:CI->O           1   0.699   0.509  Madd_old_acelerator_spawn_2_add0000_xor<22> (old_acelerator_spawn_2_add0000<22>)
-     LUT3:I0->O            1   0.612   0.000  Mcompar_acelerator_spawn_cmp_ge0000_lut<11> (Mcompar_acelerator_spawn_cmp_ge0000_lut<11>)
-     MUXCY:S->O            1   0.752   0.426  Mcompar_acelerator_spawn_cmp_ge0000_cy<11> (acelerator_spawn_cmp_ge0000)
-     LUT2:I1->O           22   0.612   0.989  acelerator_spawn_and00001 (acelerator_spawn_and0000)
-     FDRE:R                    0.795          acelerator_spawn_3
-    ----------------------------------------
-    Total                      8.403ns (5.876ns logic, 2.528ns route)
-                                       (69.9% logic, 30.1% route)
-
-=========================================================================
 Timing constraint: Default period analysis for Clock 'clk_enemy/clk1hz_buff1'
-  Clock period: 7.978ns (frequency: 125.343MHz)
-  Total number of paths / destination ports: 5021 / 102
+  Clock period: 7.213ns (frequency: 138.640MHz)
+  Total number of paths / destination ports: 2275 / 82
 -------------------------------------------------------------------------
-Delay:               7.978ns (Levels of Logic = 13)
-  Source:            enemy2/counter_2 (FF)
-  Destination:       enemy2/counter_9 (FF)
+Delay:               7.213ns (Levels of Logic = 14)
+  Source:            enemy/pos_y_1 (FF)
+  Destination:       alu/collision (FF)
   Source Clock:      clk_enemy/clk1hz_buff1 rising
   Destination Clock: clk_enemy/clk1hz_buff1 rising
 
-  Data Path: enemy2/counter_2 to enemy2/counter_9
+  Data Path: enemy/pos_y_1 to alu/collision
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDRE:C->Q             3   0.514   0.520  enemy2/counter_2 (enemy2/counter_2)
-     LUT2:I1->O            1   0.612   0.000  enemy2/Madd_old_pos_y_8_addsub0001_lut<2> (enemy2/Madd_old_pos_y_8_addsub0001_lut<2>)
-     MUXCY:S->O            1   0.404   0.000  enemy2/Madd_old_pos_y_8_addsub0001_cy<2> (enemy2/Madd_old_pos_y_8_addsub0001_cy<2>)
-     MUXCY:CI->O           1   0.051   0.000  enemy2/Madd_old_pos_y_8_addsub0001_cy<3> (enemy2/Madd_old_pos_y_8_addsub0001_cy<3>)
-     MUXCY:CI->O           1   0.051   0.000  enemy2/Madd_old_pos_y_8_addsub0001_cy<4> (enemy2/Madd_old_pos_y_8_addsub0001_cy<4>)
-     MUXCY:CI->O           1   0.051   0.000  enemy2/Madd_old_pos_y_8_addsub0001_cy<5> (enemy2/Madd_old_pos_y_8_addsub0001_cy<5>)
-     MUXCY:CI->O           1   0.051   0.000  enemy2/Madd_old_pos_y_8_addsub0001_cy<6> (enemy2/Madd_old_pos_y_8_addsub0001_cy<6>)
-     MUXCY:CI->O           1   0.051   0.000  enemy2/Madd_old_pos_y_8_addsub0001_cy<7> (enemy2/Madd_old_pos_y_8_addsub0001_cy<7>)
-     MUXCY:CI->O           1   0.051   0.000  enemy2/Madd_old_pos_y_8_addsub0001_cy<8> (enemy2/Madd_old_pos_y_8_addsub0001_cy<8>)
-     XORCY:CI->O           1   0.699   0.509  enemy2/Madd_old_pos_y_8_addsub0001_xor<9> (enemy2/old_pos_y_8_addsub0001<9>)
-     LUT1:I0->O            1   0.612   0.000  enemy2/Mcompar_old_pos_y_8_cmp_lt0000_cy<6>_rt (enemy2/Mcompar_old_pos_y_8_cmp_lt0000_cy<6>_rt)
-     MUXCY:S->O            1   0.404   0.000  enemy2/Mcompar_old_pos_y_8_cmp_lt0000_cy<6> (enemy2/Mcompar_old_pos_y_8_cmp_lt0000_cy<6>)
-     MUXCY:CI->O          13   0.399   0.839  enemy2/Mcompar_old_pos_y_8_cmp_lt0000_cy<7> (enemy2/Mcompar_old_pos_y_8_cmp_lt0000_cy<7>)
-     LUT4:I3->O           10   0.612   0.750  enemy2/counter_or00001 (enemy2/counter_or0000)
-     FDRE:R                    0.795          enemy2/counter_0
+     FDRE:C->Q             8   0.514   0.795  enemy/pos_y_1 (enemy/pos_y_1)
+     LUT1:I0->O            1   0.612   0.000  alu/Madd_add0001_addsub0000_cy<1>_rt (alu/Madd_add0001_addsub0000_cy<1>_rt)
+     MUXCY:S->O            1   0.404   0.000  alu/Madd_add0001_addsub0000_cy<1> (alu/Madd_add0001_addsub0000_cy<1>)
+     MUXCY:CI->O           1   0.051   0.000  alu/Madd_add0001_addsub0000_cy<2> (alu/Madd_add0001_addsub0000_cy<2>)
+     MUXCY:CI->O           1   0.051   0.000  alu/Madd_add0001_addsub0000_cy<3> (alu/Madd_add0001_addsub0000_cy<3>)
+     MUXCY:CI->O           1   0.051   0.000  alu/Madd_add0001_addsub0000_cy<4> (alu/Madd_add0001_addsub0000_cy<4>)
+     MUXCY:CI->O           1   0.051   0.000  alu/Madd_add0001_addsub0000_cy<5> (alu/Madd_add0001_addsub0000_cy<5>)
+     MUXCY:CI->O           1   0.051   0.000  alu/Madd_add0001_addsub0000_cy<6> (alu/Madd_add0001_addsub0000_cy<6>)
+     MUXCY:CI->O           1   0.051   0.000  alu/Madd_add0001_addsub0000_cy<7> (alu/Madd_add0001_addsub0000_cy<7>)
+     XORCY:CI->O           1   0.699   0.509  alu/Madd_add0001_addsub0000_xor<8> (alu/add0001_addsub0000<8>)
+     LUT1:I0->O            1   0.612   0.000  alu/Mcompar_collision_cmp_le0001_cy<6>_rt (alu/Mcompar_collision_cmp_le0001_cy<6>_rt)
+     MUXCY:S->O            1   0.404   0.000  alu/Mcompar_collision_cmp_le0001_cy<6> (alu/Mcompar_collision_cmp_le0001_cy<6>)
+     MUXCY:CI->O           1   0.400   0.360  alu/Mcompar_collision_cmp_le0001_cy<7> (alu/collision_cmp_le0001)
+     LUT4_L:I3->LO         1   0.612   0.103  alu/collision_mux0000780 (alu/collision_mux0000780)
+     LUT4:I3->O            1   0.612   0.000  alu/collision_mux0000796 (alu/collision_mux0000)
+     FDRE:D                    0.268          alu/collision
     ----------------------------------------
-    Total                      7.978ns (5.361ns logic, 2.618ns route)
-                                       (67.2% logic, 32.8% route)
+    Total                      7.213ns (5.446ns logic, 1.767ns route)
+                                       (75.5% logic, 24.5% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'clk_spawn/clk1hz_buff1'
+  Total number of paths / destination ports: 17 / 16
+-------------------------------------------------------------------------
+Offset:              4.492ns (Levels of Logic = 2)
+  Source:            reset (PAD)
+  Destination:       active_pos_2 (FF)
+  Destination Clock: clk_spawn/clk1hz_buff1 rising
+
+  Data Path: reset to active_pos_2
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            50   1.106   1.230  reset_IBUF (load_mux0001_norst)
+     LUT2:I0->O           10   0.612   0.750  active_pos2_mux0000<2>21 (N33)
+     FDS:S                     0.795          active_pos_2
+    ----------------------------------------
+    Total                      4.492ns (2.513ns logic, 1.979ns route)
+                                       (55.9% logic, 44.1% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'clk/clk1hz_buff'
   Total number of paths / destination ports: 51 / 16
 -------------------------------------------------------------------------
-Offset:              5.094ns (Levels of Logic = 4)
+Offset:              5.133ns (Levels of Logic = 4)
   Source:            left (PAD)
   Destination:       offset_car_x_6 (FF)
   Destination Clock: clk/clk1hz_buff rising
@@ -851,38 +918,18 @@ Offset:              5.094ns (Levels of Logic = 4)
     ----------------------------------------  ------------
      IBUF:I->O            13   1.106   0.988  left_IBUF (left_IBUF)
      LUT2:I0->O            1   0.612   0.509  offset_car_x_mux0000<3>16 (offset_car_x_mux0000<3>16)
-     LUT4:I0->O            1   0.612   0.387  offset_car_x_mux0000<3>19 (offset_car_x_mux0000<3>19)
-     LUT3:I2->O            1   0.612   0.000  offset_car_x_mux0000<3>37 (offset_car_x_mux0000<3>)
+     LUT4:I0->O            1   0.612   0.426  offset_car_x_mux0000<3>19 (offset_car_x_mux0000<3>19)
+     LUT3:I1->O            1   0.612   0.000  offset_car_x_mux0000<3>37 (offset_car_x_mux0000<3>)
      FDE:D                     0.268          offset_car_x_6
     ----------------------------------------
-    Total                      5.094ns (3.210ns logic, 1.884ns route)
-                                       (63.0% logic, 37.0% route)
-
-=========================================================================
-Timing constraint: Default OFFSET IN BEFORE for Clock 'clk_spawn/clk1hz_buff1'
-  Total number of paths / destination ports: 18 / 18
--------------------------------------------------------------------------
-Offset:              4.405ns (Levels of Logic = 2)
-  Source:            reset (PAD)
-  Destination:       active_pos_2 (FF)
-  Destination Clock: clk_spawn/clk1hz_buff1 rising
-
-  Data Path: reset to active_pos_2
-                                Gate     Net
-    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
-    ----------------------------------------  ------------
-     IBUF:I->O            32   1.106   1.142  reset_IBUF (reset_IBUF)
-     LUT2:I1->O           10   0.612   0.750  active_pos2_mux0000<2>21 (N17)
-     FDS:S                     0.795          active_pos_2
-    ----------------------------------------
-    Total                      4.405ns (2.513ns logic, 1.892ns route)
-                                       (57.1% logic, 42.9% route)
+    Total                      5.133ns (3.210ns logic, 1.923ns route)
+                                       (62.5% logic, 37.5% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'clk_enemy/clk1hz_buff1'
   Total number of paths / destination ports: 41 / 41
 -------------------------------------------------------------------------
-Offset:              4.488ns (Levels of Logic = 2)
+Offset:              2.979ns (Levels of Logic = 1)
   Source:            reset (PAD)
   Destination:       enemy2/counter_9 (FF)
   Destination Clock: clk_enemy/clk1hz_buff1 rising
@@ -891,12 +938,11 @@ Offset:              4.488ns (Levels of Logic = 2)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            32   1.106   1.225  reset_IBUF (reset_IBUF)
-     LUT4:I0->O           10   0.612   0.750  enemy2/counter_or00001 (enemy2/counter_or0000)
-     FDRE:R                    0.795          enemy2/counter_0
+     IBUF:I->O            50   1.106   1.078  reset_IBUF (load_mux0001_norst)
+     FDRE:R                    0.795          enemy2/pos_y_0
     ----------------------------------------
-    Total                      4.488ns (2.513ns logic, 1.975ns route)
-                                       (56.0% logic, 44.0% route)
+    Total                      2.979ns (1.901ns logic, 1.078ns route)
+                                       (63.8% logic, 36.2% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'clk50mhz'
@@ -920,14 +966,14 @@ Offset:              4.040ns (Levels of Logic = 1)
 =========================================================================
 
 
-Total REAL time to Xst completion: 103.00 secs
-Total CPU time to Xst completion: 102.88 secs
+Total REAL time to Xst completion: 106.00 secs
+Total CPU time to Xst completion: 105.76 secs
  
 --> 
 
-Total memory usage is 333232 kilobytes
+Total memory usage is 344880 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :   38 (   0 filtered)
-Number of infos    :    6 (   0 filtered)
+Number of warnings :   55 (   0 filtered)
+Number of infos    :   10 (   0 filtered)
 
