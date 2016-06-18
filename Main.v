@@ -107,7 +107,8 @@ module Main(
 	wire [9:0]x_pos2;
 	wire [9:0]y_pos1;
 	wire [9:0]y_pos2;
-	Rom_Position posiciones(q,x_pos1,y_pos1,rom_enable[0],x_pos2,y_pos2,rom_enable[1]);
+	//Rom_Position posiciones(q,x_pos1,y_pos1,rom_enable[0],x_pos2,y_pos2,rom_enable[1]);
+	Rom_Position posiciones(q,x_pos1,y_pos1,x_pos2,y_pos2);
 	
 	//setting image Bars
 	rom_Bars rom2(address_bars_left,data_Bars_l);
@@ -129,14 +130,21 @@ module Main(
 			active_pos= 610;
 			active_posx = left_pos;
 		end
-		else if(counter == 15)
+		else begin
+			enable =0;
+		end
+		if(counter == 15)
 		begin
 			//ce=0;
 			enable2=1;
 			active_pos2 = 610;
 			active_posx2 = right_pos;
 		end
-		else if(counter == 50) // acelerar
+		else begin
+			enable2=0;
+		end
+		
+		if(counter == 50) // acelerar
 		begin
 			counter = 0;
 			/*acelerator_spawn = acelerator_spawn + 1000;
@@ -163,15 +171,21 @@ module Main(
 		
 		if(enemy_pos_y>=600)
 		begin
-			enable = rom_enable[0];
+			enable = 1;//rom_enable[0];
 			active_pos = y_pos1;
 			active_posx = x_pos1; 
 		end
+		else begin
+			enable=0;
+		end
 		if(enemy_pos_y2>=600)
 		begin
-			enable2=rom_enable[1];
+			enable2=1;//rom_enable[1];
 			active_pos = y_pos2; 
 			active_posx2 =x_pos2;
+		end
+		else begin
+			enable2=0;
 		end
 	end
 	

@@ -44,11 +44,11 @@ Clock clk50mhz to Pad
             | clk (edge) |                  | Clock  |
 Destination |   to PAD   |Internal Clock(s) | Phase  |
 ------------+------------+------------------+--------+
-blue_out    |    8.263(R)|vga_clk           |   0.000|
-green_out   |    8.314(R)|vga_clk           |   0.000|
-hsync       |    7.739(R)|vga_clk           |   0.000|
-red_out     |    8.923(R)|vga_clk           |   0.000|
-vsync       |    7.786(R)|vga_clk           |   0.000|
+blue_out    |    8.184(R)|vga_clk           |   0.000|
+green_out   |    7.943(R)|vga_clk           |   0.000|
+hsync       |    8.297(R)|vga_clk           |   0.000|
+red_out     |    8.157(R)|vga_clk           |   0.000|
+vsync       |    7.696(R)|vga_clk           |   0.000|
 ------------+------------+------------------+--------+
 
 Clock to Setup on destination clock clk50mhz
@@ -56,11 +56,11 @@ Clock to Setup on destination clock clk50mhz
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-clk50mhz       |   11.203|         |         |         |
+clk50mhz       |   11.865|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 
-Analysis completed Sat Jun 18 01:33:09 2016 
+Analysis completed Sat Jun 18 13:49:24 2016 
 --------------------------------------------------------------------------------
 
 Trace Settings:

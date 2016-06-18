@@ -24,16 +24,11 @@ module Enemy(
 	
 	always @(posedge logic_clk)
 	begin
-		if(offset_y==610)
-			cualquiera=0;
-		else
-			cualquiera=620;
-	
 		if(!collision)
 		begin
-			if(cualquiera+counter < 601)
+			if(offset_y+counter < 601)
 			begin
-				pos_y =cualquiera+counter;
+				pos_y =offset_y+counter;
 				counter = counter +1;
 			end
 			else begin
@@ -46,9 +41,6 @@ module Enemy(
 					pos_y=0;
 					counter=0;
 				end
-			end
-			else begin
-				pos_y=620;
 			end
 		end
 		if(reset)
