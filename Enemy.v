@@ -16,17 +16,24 @@ module Enemy(
 	assign pos_x = offset_x;
 	reg [9:0]counter;
 	wire [2:0] data_pix;
+	reg [9:0]cualquiera;
 	reg [13:0]address; 
 	rom_Car enemy (address, data_pix);
 		
+//	assign cualquiera = (offset_y==610)?0:620;
 	
 	always @(posedge logic_clk)
 	begin
+		if(offset_y==610)
+			cualquiera=0;
+		else
+			cualquiera=620;
+	
 		if(!collision)
 		begin
-			if(offset_y +counter < 601)
+			if(cualquiera+counter < 601)
 			begin
-				pos_y =offset_y+counter;
+				pos_y =cualquiera+counter;
 				counter = counter +1;
 			end
 			else begin

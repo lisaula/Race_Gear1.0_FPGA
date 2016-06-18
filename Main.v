@@ -23,7 +23,7 @@ module Main(
 	
 	//Cars data color variables
 	reg [13:0] address;
-	wire [2:0] data_pix;	
+	wire [2:0] data_pix;
 	reg [9:0]offset_car_x;
 	reg [9:0]offset_car_y;
 	
@@ -37,7 +37,7 @@ module Main(
 // synthesis attribute CLKFX_DIVIDE of vga_clock_dcm is 4
 // synthesis attribute CLKFX_MULTIPLY of vga_clock_dcm is 2
 	DCM vga_clock_dcm (.CLKIN(clk50mhz),.CLKFX(vga_clk));
-	
+	//assign vga_clk = clk50mhz;
 	
 	CLK_Divider #(.counter_limit(31'h2625a0))clk(.clk(clk50mhz),.acelerator(0),.clk1hz(logic_clk));
 	//setting image CarBlue
@@ -59,8 +59,9 @@ module Main(
 	//clk for spawning the enemies
 	//reg count_e;
 	wire spawn_clk;
-	reg[24:0] acelerator_spawn;
-	CLK_Divider #(.counter_limit(25'h2625a0))clk_spawn(.clk(clk50mhz),.acelerator(acelerator_spawn),.clk1hz(spawn_clk));
+	//reg[24:0] acelerator_spawn;
+	//h2625a0
+	CLK_Divider #(.counter_limit(25'h2625a0))clk_spawn(.clk(clk50mhz),.acelerator(0),.clk1hz(spawn_clk));
 	//Spawn_clk spawn(clk50mhz,count_e,spawn_clk);
 	//1
 	wire [9:0]enemy_pos_x;
@@ -69,7 +70,8 @@ module Main(
 	wire collision;
 	reg enable;
 	reg [9:0]active_pos;
-	Enemy enemy(vga_clk,enemy_clk,reset,enable, left_pos,active_pos,hcount, vcount,collision,enemy_pos_x,enemy_pos_y,enemy_data);
+	reg [9:0]active_posx;
+	Enemy enemy(vga_clk,enemy_clk,reset,enable, active_posx,active_pos,hcount, vcount,collision,enemy_pos_x,enemy_pos_y,enemy_data);
 	
 	//2
 	wire [9:0]enemy_pos_x2;
@@ -77,7 +79,8 @@ module Main(
 	wire [2:0]enemy_data2;
 	reg enable2;
 	reg [9:0]active_pos2;
-	Enemy enemy2(vga_clk,enemy_clk,reset,enable2, right_pos,active_pos2,hcount, vcount,collision,enemy_pos_x2,enemy_pos_y2,enemy_data2);
+	reg [9:0]active_posx2;
+	Enemy enemy2(vga_clk,enemy_clk,reset,enable2, active_posx2,active_pos2,hcount, vcount,collision,enemy_pos_x2,enemy_pos_y2,enemy_data2);
 	//Enemy enemy2(vga_clk,enemy_clk,reset, right_pos,0,hcount, vcount,enemy_pos_x,enemy_pos_y,enemy_data);
 	
 	//Collision validation
@@ -91,6 +94,21 @@ module Main(
 	assign car_pos_y = offset_car_y;
 	ALU alu(enemy_clk,reset,e_pos_x, e_pos_y,enemy_pos_x2,enemy_pos_y2, car_pos_x, car_pos_y,collision);
 	
+	//Random
+	wire [2:0]q;
+	reg load;
+	Random_tiny random(q[0],enemy_clk,4'b0101,load);
+	Random_tiny random2(q[1],enemy_clk,4'b0111,load);
+	Random_tiny random3(q[2],enemy_clk,4'b1110,load);
+	
+	//Rom positions
+	wire [1:0] rom_enable;
+	wire [9:0]x_pos1;
+	wire [9:0]x_pos2;
+	wire [9:0]y_pos1;
+	wire [9:0]y_pos2;
+	Rom_Position posiciones(q,x_pos1,y_pos1,rom_enable[0],x_pos2,y_pos2,rom_enable[1]);
+	
 	//setting image Bars
 	rom_Bars rom2(address_bars_left,data_Bars_l);
 	rom_Bars rom3(address_bars_right,data_Bars_r);
@@ -101,27 +119,29 @@ module Main(
 	reg ce;
 	always @(posedge spawn_clk)
 	begin
+		load =0;
 		if(ce)begin
 			counter =counter+1;
 		end
 		if(counter==1)
 		begin
 			enable =1;
-			active_pos= initial_pos;
+			active_pos= 610;
+			active_posx = left_pos;
 		end
 		else if(counter == 15)
 		begin
 			//ce=0;
 			enable2=1;
-			active_pos2 = initial_pos;
+			active_pos2 = 610;
+			active_posx2 = right_pos;
 		end
 		else if(counter == 50) // acelerar
 		begin
 			counter = 0;
-			
-			acelerator_spawn = acelerator_spawn + 1000;
+			/*acelerator_spawn = acelerator_spawn + 1000;
 			if(acelerator_spawn >= 25'h2625a0)
-				acelerator_spawn = 0;
+				acelerator_spawn = 0;*/
 				
 			acelerator_enemy = acelerator_enemy + 1000;
 			if(acelerator_enemy >= 25'h186a0)
@@ -129,12 +149,29 @@ module Main(
 		end
 		else if (reset)
 		begin
+			//random variables
+			load = 1;
+			
+			acelerator_enemy=0;
 			ce =1;
 			active_pos2 = end_pos;
 			active_pos=end_pos;
 			counter=0;
 			enable =0;
 			enable2=0;
+		end
+		
+		if(enemy_pos_y>=600)
+		begin
+			enable = rom_enable[0];
+			active_pos = y_pos1;
+			active_posx = x_pos1; 
+		end
+		if(enemy_pos_y2>=600)
+		begin
+			enable2=rom_enable[1];
+			active_pos = y_pos2; 
+			active_posx2 =x_pos2;
 		end
 	end
 	
@@ -249,5 +286,16 @@ module Main(
 			address_bars_right=0;
 		end
 	end //always
+	
+	initial
+	begin
+		ce=0;
+		counter =0;
+		active_pos=0;
+		active_pos2=0;
+		active_posx=0;
+		active_posx2=0;
+		acelerator_enemy=0;
+	end
 	
 endmodule

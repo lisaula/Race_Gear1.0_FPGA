@@ -1,43 +1,22 @@
-Running: C:\Xilinx\14.7\ISE_DS\ISE\bin\nt\unwrapped\fuse.exe -intstyle ise -incremental -lib unisims_ver -lib unimacro_ver -lib xilinxcorelib_ver -o C:/Users/Raim/Documents/Laboratorio/RaceGear/testbench_isim_beh.exe -prj C:/Users/Raim/Documents/Laboratorio/RaceGear/testbench_beh.prj work.testbench work.glbl 
+Running: fuse.exe -relaunch -intstyle "ise" -incremental -lib "unisims_ver" -lib "unimacro_ver" -lib "xilinxcorelib_ver" -o "C:/Users/Raim/Documents/Laboratorio/RaceGear/EnemyTb_isim_beh.exe" -prj "C:/Users/Raim/Documents/Laboratorio/RaceGear/EnemyTb_beh.prj" "work.EnemyTb" "work.glbl" 
 ISim P.20131013 (signature 0x8ef4fb42)
 Number of CPUs detected in this system: 1
 Turning on mult-threading, number of parallel sub-compilation jobs: 0 
 Determining compilation order of HDL files
 Analyzing Verilog file "C:/Users/Raim/Documents/Laboratorio/RaceGear/rom_Car.v" into library work
-Analyzing Verilog file "C:/Users/Raim/Documents/Laboratorio/RaceGear/VGA_LOGIC.v" into library work
-Analyzing Verilog file "C:/Users/Raim/Documents/Laboratorio/RaceGear/rom_Bars.v" into library work
 Analyzing Verilog file "C:/Users/Raim/Documents/Laboratorio/RaceGear/Enemy.v" into library work
-Analyzing Verilog file "C:/Users/Raim/Documents/Laboratorio/RaceGear/CLK_Divider.v" into library work
-Analyzing Verilog file "C:/Users/Raim/Documents/Laboratorio/RaceGear/ALU.v" into library work
-Analyzing Verilog file "C:/Users/Raim/Documents/Laboratorio/RaceGear/Main.v" into library work
-Analyzing Verilog file "C:/Users/Raim/Documents/Laboratorio/RaceGear/testbench.v" into library work
+Analyzing Verilog file "C:/Users/Raim/Documents/Laboratorio/RaceGear/EnemyTb.v" into library work
 Analyzing Verilog file "C:/Xilinx/14.7/ISE_DS/ISE//verilog/src/glbl.v" into library work
 Starting static elaboration
-WARNING:HDLCompiler:1016 - "C:/Users/Raim/Documents/Laboratorio/RaceGear/Main.v" Line 39: Port CLK0 is not connected to this instance
-WARNING:HDLCompiler:189 - "C:/Users/Raim/Documents/Laboratorio/RaceGear/Main.v" Line 80: Size mismatch in connection of port <offset_x>. Formal port size is 10-bit while actual signal size is 9-bit.
-WARNING:HDLCompiler:189 - "C:/Users/Raim/Documents/Laboratorio/RaceGear/Main.v" Line 42: Size mismatch in connection of port <acelerator>. Formal port size is 25-bit while actual signal size is 32-bit.
-WARNING:HDLCompiler:189 - "C:/Users/Raim/Documents/Laboratorio/RaceGear/Main.v" Line 72: Size mismatch in connection of port <offset_x>. Formal port size is 10-bit while actual signal size is 9-bit.
 Completed static elaboration
-Fuse Memory Usage: 102748 KB
-Fuse CPU Usage: 296 ms
-Compiling module dcm_clock_divide_by_2
-Compiling module dcm_maximum_period_check(clock_n...
-Compiling module dcm_maximum_period_check(clock_n...
-Compiling module dcm_clock_lost
-Compiling module DCM_default
-Compiling module CLK_Divider(counter_limit=31'b01...
+Fuse Memory Usage: 102364 KB
+Fuse CPU Usage: 265 ms
 Compiling module rom_Car
-Compiling module CLK_Divider(counter_limit=25'b01...
-Compiling module CLK_Divider(counter_limit=25'b01...
 Compiling module Enemy
-Compiling module ALU
-Compiling module rom_Bars
-Compiling module VGA_LOGIC
-Compiling module Main
-Compiling module testbench
+Compiling module EnemyTb
 Compiling module glbl
 Time Resolution for simulation is 1ps.
-Compiled 16 Verilog Units
-Built simulation executable C:/Users/Raim/Documents/Laboratorio/RaceGear/testbench_isim_beh.exe
-Fuse Memory Usage: 108040 KB
-Fuse CPU Usage: 451 ms
+Compiled 4 Verilog Units
+Built simulation executable C:/Users/Raim/Documents/Laboratorio/RaceGear/EnemyTb_isim_beh.exe
+Fuse Memory Usage: 105928 KB
+Fuse CPU Usage: 296 ms

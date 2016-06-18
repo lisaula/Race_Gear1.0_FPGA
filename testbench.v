@@ -27,7 +27,7 @@ module testbench(
 		reset =0;
 		left =0;
 		right =0;
-		#50
+		#20
 		reset =1;
 		left =0;
 		right =0;

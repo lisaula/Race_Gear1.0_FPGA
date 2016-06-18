@@ -1,0 +1,4 @@
+verilog work "rom_Car.v"
+verilog work "Enemy.v"
+verilog work "EnemyTb.v"
+verilog work "C:/Xilinx/14.7/ISE_DS/ISE//verilog/src/glbl.v"
