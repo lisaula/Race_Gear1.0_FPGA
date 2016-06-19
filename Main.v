@@ -8,7 +8,8 @@ module Main(
    output green_out,
    output blue_out,
 	output hsync,
-	output vsync
+	output vsync,
+	output [3:0] data_sound
 	 );
 	wire vga_clk;
 	//assign vga_clk = clk50mhz;
@@ -49,7 +50,7 @@ module Main(
 		center_pos = 9'h117,
 		right_pos =9'h169,
 		initial_pos = 10'h0,
-		end_pos=10'h26c;
+		end_pos=10'h262;
 	
 	//setting enemies
 	wire enemy_clk;
@@ -58,8 +59,6 @@ module Main(
 	CLK_Divider #(.counter_limit(25'h186a0))clk_enemy(.clk(clk50mhz),.acelerator(acelerator_enemy),.clk1hz(enemy_clk));
 	//clk for spawning the enemies
 	//reg count_e;
-	wire spawn_clk;
-	CLK_Divider #(.counter_limit(25'h2625a0))clk_spawn(.clk(clk50mhz),.acelerator(0),.clk1hz(spawn_clk));
 	//Spawn_clk spawn(clk50mhz,count_e,spawn_clk);
 	//1
 	wire [9:0]enemy_pos_x;
@@ -95,9 +94,9 @@ module Main(
 	//Setting Random
 	wire [2:0]q;
 	reg load;
-	Random_tiny rand1(q[2],spawn_clk,4'b0001,load);
-	Random_tiny rand2(q[1],spawn_clk,4'b0011,load);
-	Random_tiny rand3(q[0],spawn_clk,4'b1001,load);
+	Random_tiny rand1(q[2],vga_clk,4'b0001,load);
+	Random_tiny rand2(q[1],vga_clk,4'b0011,load);
+	Random_tiny rand3(q[0],vga_clk,4'b1001,load);
 	
 	//setting position Rom
 	wire [9:0]x0;
@@ -110,12 +109,18 @@ module Main(
 	rom_Bars rom2(address_bars_left,data_Bars_l);
 	rom_Bars rom3(address_bars_right,data_Bars_r);
 	
+	//setting audio
+	reg[14:0] address_sound;
+	wire clk_sound;
+	CLK_Divider #(.counter_limit((25'h61b)/2))clk_music(.clk(clk50mhz),.acelerator(0),.clk1hz(clk_sound));
+	//rom_Song rom_sound(address_sound,data_sound);
+	
 	//VGA instantiate
 	VGA_LOGIC vga(vga_clk,data,red_out,green_out,blue_out,hsync,vsync,hcount, vcount);
-	reg [5:0]counter; 
+	reg [9:0]counter; 
 	reg ce;
 	reg [1:0]estates;
-	always @(posedge spawn_clk)
+	always @(posedge enemy_clk)
 	begin
 	
 		load=0;
@@ -131,9 +136,8 @@ module Main(
 				active_posx1 = left_pos;
 			end
 		end
-		else if(counter == 1)
+		if(counter ==250)
 		begin
-			//ce=0;
 			//enable2=1;
 			if(!estates[1]) begin
 				estates[1]=1;
@@ -141,7 +145,7 @@ module Main(
 				active_posx2=right_pos;
 			end
 		end
-		else if(counter == 50) // acelerar
+		else if(counter == 250) // acelerar
 		begin
 			counter = 0;
 				
@@ -155,11 +159,15 @@ module Main(
 			ce =1;
 			active_pos2 = end_pos;
 			active_pos=end_pos;
-			counter=0;
+			
 			enable =0;
 			enable2=0;
+			//random load
 			load=1;
+			//appearing varible
+			counter=0;
 			estates=2'b0;
+			
 		end
 		enable=0;
 		enable2=0;
@@ -167,11 +175,21 @@ module Main(
 			active_posx1 = x0;
 			active_pos = y0;
 			enable = 1;
+			//segundo carro
+			/*active_posx2 = x1;
+			active_pos2 = y1;
+			enable2 = 1;*/
+		end else begin
+			enable=0;
 		end
 		if(enemy_pos_y2==620) begin
 			active_posx2 = x1;
-			active_pos2 = y1;
+			if(estates[1]) begin
+				active_pos2 = y1;
+			end
 			enable2 = 1;
+		end else begin
+			enable2=0;
 		end
 	end
 	
@@ -286,5 +304,23 @@ module Main(
 			address_bars_right=0;
 		end
 	end //always
+	
+	always @(posedge clk_sound)
+	begin
+		if(!collision) begin
+			if(address_sound < 25195)
+			begin
+				address_sound = address_sound+1;
+			end
+			else begin
+				address_sound =0;
+			end
+		end
+		else begin
+			address_sound =0;
+		end
+		if(reset)
+			address_sound =0;
+	end //always sound
 	
 endmodule

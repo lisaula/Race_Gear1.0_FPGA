@@ -1,12 +1,12 @@
 //! **************************************************************************
-// Written by: Map P.20131013 on Sat Jun 18 15:16:32 2016
+// Written by: Map P.20131013 on Sun Jun 19 01:58:53 2016
 //! **************************************************************************
 
 SCHEMATIC START;
 COMP "left" LOCATE = SITE "C10" LEVEL 1;
 COMP "hsync" LOCATE = SITE "D10" LEVEL 1;
-COMP "right" LOCATE = SITE "C12" LEVEL 1;
-COMP "reset" LOCATE = SITE "C13" LEVEL 1;
+COMP "right" LOCATE = SITE "C13" LEVEL 1;
+COMP "reset" LOCATE = SITE "C12" LEVEL 1;
 COMP "vsync" LOCATE = SITE "E9" LEVEL 1;
 COMP "red_out" LOCATE = SITE "A10" LEVEL 1;
 COMP "green_out" LOCATE = SITE "E11" LEVEL 1;

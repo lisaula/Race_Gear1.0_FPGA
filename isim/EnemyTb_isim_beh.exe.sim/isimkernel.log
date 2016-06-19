@@ -1,0 +1,28 @@
+Command line:
+   EnemyTb_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  49197
+
+Sun Jun 19 01:30:13 2016
+
+
+ Elaboration Time: 0.093601 sec
+
+ Current Memory Usage: 694.796 Meg
+
+ Total Signals          : 28
+ Total Nets             : 98
+ Total Signal Drivers   : 19
+ Total Blocks           : 4
+ Total Primitive Blocks : 2
+ Total Processes        : 27
+ Total Traceable Variables  : 33
+ Total Scalar Nets and Variables : 49415
+
+ Total Simulation Time: 1.57561 sec
+
+ Current Memory Usage: 694.796 Meg
+
+Sun Jun 19 02:41:40 2016
+

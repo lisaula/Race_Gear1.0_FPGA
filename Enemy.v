@@ -40,7 +40,7 @@ module Enemy(
 		if(reset)
 		begin
 			counter=0;
-			pos_y=620;
+			pos_y=610;
 		end
 	end
 	

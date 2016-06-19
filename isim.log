@@ -1,10 +1,7 @@
 ISim log file
-Running: C:\Users\Raim\Documents\Laboratorio\RaceGear\testbench_isim_beh.exe -intstyle ise -gui -tclbatch isim.cmd -wdb C:/Users/Raim/Documents/Laboratorio/RaceGear/testbench_isim_beh.wdb 
+Running: C:\Users\Raim\Documents\Laboratorio\RaceGear\EnemyTb_isim_beh.exe -intstyle ise -gui -tclbatch isim.cmd -wdb C:/Users/Raim/Documents/Laboratorio/RaceGear/EnemyTb_isim_beh.wdb 
 ISim P.20131013 (signature 0x8ef4fb42)
 This is a Full version of ISim.
-WARNING:  For instance m/clk/, width 25 of formal port acelerator is not equal to width 32 of actual constant.
-WARNING:  For instance m/enemy/, width 10 of formal port offset_x is not equal to width 9 of actual constant.
-WARNING:  For instance m/enemy2/, width 10 of formal port offset_x is not equal to width 9 of actual constant.
 Time resolution is 1 ps
 # onerror resume
 # wave add /

@@ -1,7 +1,7 @@
 Release 14.7 - par P.20131013 (nt)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-Sat Jun 18 15:19:57 2016
+Sun Jun 19 02:00:16 2016
 
 
 # NOTE: This file is designed to be imported into a spreadsheet program
@@ -62,8 +62,8 @@ C8||DIFFM|IO_L11P_0/GCLK10|UNUSED||0|||||||||
 C9||DIFFSI|IP_L07N_0|UNUSED||0|||||||||
 C10|left|IBUF|IP_L07P_0|INPUT|LVCMOS33|0||||NONE||LOCATED|NO|NONE|
 C11||DIFFM|IO_L05P_0|UNUSED||0|||||||||
-C12|right|IBUF|IP_L02N_0|INPUT|LVCMOS33|0||||NONE||LOCATED|NO|NONE|
-C13|reset|IBUF|IP|INPUT|LVCMOS33|0||||NONE||LOCATED|NO|NONE|
+C12|reset|IBUF|IP_L02N_0|INPUT|LVCMOS33|0||||NONE||LOCATED|NO|NONE|
+C13|right|IBUF|IP|INPUT|LVCMOS33|0||||NONE||LOCATED|NO|NONE|
 C14|||TDO||||||||||||
 C15||DIFFS|IO_L19N_1/LDC2|UNUSED||1|||||||||
 C16||DIFFM|IO_L19P_1/LDC1|UNUSED||1|||||||||
