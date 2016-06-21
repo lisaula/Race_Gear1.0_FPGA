@@ -35,10 +35,10 @@ module Rom_Position(
 				y1 = 10'h262;
 			end
 			3'b100: begin
-				x0 = 10'hc5;
-				y0 = 10'h262;
-				x1 = 10'h169;
-				y1 = 10'h0;
+				x1 = 10'hc5;
+				y1 = 10'h262;
+				x0 = 10'h169;
+				y0 = 10'h0;
 			end
 			3'b101: begin
 				x0 = 10'h117;

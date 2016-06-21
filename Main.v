@@ -60,11 +60,15 @@ module Main(
 	//clk for spawning the enemies
 	//reg count_e;
 	//Spawn_clk spawn(clk50mhz,count_e,spawn_clk);
+	//collision variables
+	wire collision;
+	wire coll0_2Cars;
+	wire coll2_4Cars;
+	assign collision = (coll0_2Cars || coll2_4Cars);
 	//1
 	wire [9:0]enemy_pos_x;
 	wire [9:0]enemy_pos_y;
 	wire [2:0]enemy_data;
-	wire collision;
 	reg enable;
 	reg [9:0]active_pos;
 	reg [9:0]active_posx1;
@@ -78,25 +82,37 @@ module Main(
 	reg [9:0]active_pos2;
 	reg [9:0]active_posx2;
 	Enemy enemy2(vga_clk,enemy_clk,reset,enable2, active_posx2,active_pos2,hcount, vcount,collision,enemy_pos_x2,enemy_pos_y2,enemy_data2);
+	
+	//3
+	wire [9:0]enemy_pos_x3;
+	wire [9:0]enemy_pos_y3;
+	wire [2:0]enemy_data3;
+	reg enable3;
+	reg [9:0]active_pos3;
+	reg [9:0]active_posx3;
+	Enemy enemy3(vga_clk,enemy_clk,reset,enable3, active_posx3,active_pos3,hcount, vcount,collision,enemy_pos_x3,enemy_pos_y3,enemy_data3);
+	
+	//4
+	wire [9:0]enemy_pos_x4;
+	wire [9:0]enemy_pos_y4;
+	wire [2:0]enemy_data4;
+	reg enable4;
+	reg [9:0]active_pos4;
+	reg [9:0]active_posx4;
+	Enemy enemy4(vga_clk,enemy_clk,reset,enable4, active_posx4,active_pos4,hcount, vcount,collision,enemy_pos_x4,enemy_pos_y4,enemy_data4);
 	//Enemy enemy2(vga_clk,enemy_clk,reset, right_pos,0,hcount, vcount,enemy_pos_x,enemy_pos_y,enemy_data);
 	
 	//Collision validation
-	wire [9:0]e_pos_x;
-	wire[9:0]e_pos_y;
-	wire[9:0]car_pos_x;
-	wire[9:0]car_pos_y;
-	assign e_pos_x = enemy_pos_x;
-	assign e_pos_y = enemy_pos_y;
-	assign car_pos_x = offset_car_x;
-	assign car_pos_y = offset_car_y;
-	ALU alu(enemy_clk,reset,e_pos_x, e_pos_y,enemy_pos_x2,enemy_pos_y2, car_pos_x, car_pos_y,collision);
+	
+	ALU alu(enemy_clk,reset,enemy_pos_x, enemy_pos_y,enemy_pos_x2,enemy_pos_y2, offset_car_x, offset_car_y,coll0_2Cars);
+	ALU alu2(enemy_clk,reset,enemy_pos_x3, enemy_pos_y3,enemy_pos_x4,enemy_pos_y4, offset_car_x, offset_car_y,coll2_4Cars);
 	
 	//Setting Random
 	wire [2:0]q;
 	reg load;
-	Random_tiny rand1(q[2],vga_clk,4'b0001,load);
-	Random_tiny rand2(q[1],vga_clk,4'b0011,load);
-	Random_tiny rand3(q[0],vga_clk,4'b1001,load);
+	Random_tiny rand1(q[2],enemy_clk,4'b0001,load);
+	Random_tiny rand2(q[1],enemy_clk,4'b0011,load);
+	Random_tiny rand3(q[0],enemy_clk,4'b1001,load);
 	
 	//setting position Rom
 	wire [9:0]x0;
@@ -124,72 +140,99 @@ module Main(
 	begin
 	
 		load=0;
+		enable=0;
+		enable2=0;
+		enable3=0;
+		enable4=0;
 		if(ce)begin
 			counter =counter+1;
-		end
-		if(counter==1)
-		begin
-			//enable =1;
-			if(!estates[0]) begin
-				estates[0]=1;
-				active_pos= initial_pos;
-				active_posx1 = left_pos;
+		
+			if(counter==1)
+			begin
+				//enable =1;
+				if(!estates[0]) begin
+					estates[0]=1;
+					//activate 1st car//***
+					active_pos= initial_pos;
+					active_posx1 = left_pos;
+					//activate 2nd car
+					active_pos2 = initial_pos;
+					active_posx2=right_pos;
+				end
 			end
-		end
-		if(counter ==250)
-		begin
-			//enable2=1;
-			if(!estates[1]) begin
-				estates[1]=1;
-				active_pos2 = initial_pos;
-				active_posx2=right_pos;
+			if(counter ==270)
+			begin
+				//enable2=1;
+				if(!estates[1]) begin
+					estates[1]=1;
+					//activate 3rd card
+					active_pos3 = initial_pos;
+					active_posx3=center_pos;
+					//activate 4th car
+					active_pos4 = initial_pos;
+					active_posx4=right_pos;
+					enable3=1;
+					enable4=1;
+				end
 			end
+			/*if(counter ==150)
+			begin
+				estates = !estates;
+			end*/
+			
+			if(counter == 300) // acelerar
+			begin
+				counter = 0;
+					
+				acelerator_enemy = acelerator_enemy + 1000;
+				if(acelerator_enemy >= 25'h186a0)
+					acelerator_enemy = 0;
+			end
+		end else begin
+			active_pos4 = end_pos;
+			active_pos3 = end_pos;
+			active_pos2 = end_pos;
+			active_pos = end_pos;
 		end
-		else if(counter == 250) // acelerar
-		begin
-			counter = 0;
-				
-			acelerator_enemy = acelerator_enemy + 1000;
-			if(acelerator_enemy >= 25'h186a0)
-				acelerator_enemy = 0;
-		end
-		else if (reset)
+		if (reset)
 		begin
 			acelerator_enemy=0;
 			ce =1;
+			active_pos4 = end_pos;
+			active_pos3 = end_pos;
 			active_pos2 = end_pos;
-			active_pos=end_pos;
+			active_pos = end_pos;
 			
-			enable =0;
-			enable2=0;
+			enable =1;
+			enable2=1;
+			enable3=1;
+			enable4=1;
 			//random load
 			load=1;
 			//appearing varible
 			counter=0;
 			estates=2'b0;
-			
 		end
-		enable=0;
-		enable2=0;
 		if(enemy_pos_y==620) begin
-			active_posx1 = x0;
-			active_pos = y0;
-			enable = 1;
-			//segundo carro
-			/*active_posx2 = x1;
-			active_pos2 = y1;
-			enable2 = 1;*/
-		end else begin
-			enable=0;
-		end
-		if(enemy_pos_y2==620) begin
-			active_posx2 = x1;
-			if(estates[1]) begin
+			if(estates[0]) begin
+				active_posx1 = x0;//***
+				active_pos = y0;
+				enable = 1;
+				//segundo carro
+				active_posx2 = x1;
 				active_pos2 = y1;
+				enable2 = 1;
 			end
-			enable2 = 1;
-		end else begin
-			enable2=0;
+		end
+		if(enemy_pos_y3==620) begin
+			if(estates[1]) begin
+				active_posx3 = x0;//***
+				active_pos3 = y0;
+				active_posx4 = x1;//left_pos;
+				active_pos4 = y1;
+				enable3 = 1;
+				enable4 = 1;
+			end
 		end
 	end
 	
@@ -294,6 +337,22 @@ module Main(
 					if(hcount >= enemy_pos_x2 && hcount < enemy_pos_x2+80)
 					begin
 						data =enemy_data2;
+					end
+				end
+				//3rd car
+				if(vcount >= enemy_pos_y3 && vcount < enemy_pos_y3+121)
+				begin
+					if(hcount >= enemy_pos_x3 && hcount < enemy_pos_x3+80)
+					begin
+						data =enemy_data3;
+					end
+				end
+				//4th car
+				if(vcount >= enemy_pos_y4 && vcount < enemy_pos_y4+121)
+				begin
+					if(hcount >= enemy_pos_x4 && hcount < enemy_pos_x4+80)
+					begin
+						data =enemy_data4;
 					end
 				end
 			end //if hcount < 640
